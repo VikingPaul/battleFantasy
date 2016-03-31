@@ -40,6 +40,7 @@ var battleState = {
     enemyTotalHealth = Math.floor(Math.random()*randEnemy+10)
     enemyRemainingHealth = parseInt(enemyTotalHealth)
     enemyAttack = 1
+    enemySpeed = 1
     switch (randEnemy) {
       case 1:
         enemy = game.add.sprite(0,150, 'basicRedEnemy')
@@ -143,7 +144,9 @@ var battleState = {
       } else if (selector.world.x <= 560 && selector.world.y >= 545) {
         console.log("items");
       } else if (selector.world.x >= 730 && selector.world.y >= 545) {
-        console.log("run");
+        if (enemySpeed < playerStats.speed+playerStats.strength){
+          battleState.run()
+        }
       }
     }
 
@@ -159,7 +162,9 @@ var battleState = {
   },
   enemyAttack: function() {
     game.paused = !game.paused;
-    playerStats.currentHealth = playerStats.currentHealth - enemyAttack
+    if (Math.floor(Math.random()*(playerStats.speed+playerStats.strength)+1) <= enemySpeed) {
+      playerStats.currentHealth = playerStats.currentHealth - enemyAttack
+    } 
     playerHealthLabel.setText(`${playerStats.maxHealth} / ${playerStats.currentHealth}`)
     setTimeout(battleState.resume(), 3000)
   },
@@ -168,5 +173,8 @@ var battleState = {
   },
   death: function() {
     game.state.start('death')
+  },
+  run: function() {
+    game.state.start('escape')
   }
 }
