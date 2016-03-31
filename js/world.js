@@ -1,5 +1,4 @@
-var playerHeight = 0
-var playerWidth = 0
+
 var worldState = {
   create: function() {
     game.physics.startSystem(Phaser.Physics.ARCADE);

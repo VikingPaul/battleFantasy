@@ -1,3 +1,5 @@
+var playerStats = {}
+playerStats.deathCount = 0
 var loadState = {
   preload: function() {
     var loadingLabel = game.add.text(80, 150, 'loading...',
@@ -42,5 +44,5 @@ var loadState = {
   },
   create: function() {
     game.state.start('menu')
-  }
+  },
 }
