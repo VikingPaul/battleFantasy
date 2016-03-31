@@ -5,6 +5,7 @@ var enemyHealthLabel
 var enemyAttack
 var battleState = {
   create: function() {
+    game.world.resize(900, 600);
     ground = game.add.group()
     ground.create(0,0, 'battleOutdoorGrass')
     ground.scale.setTo(10,4.5)
