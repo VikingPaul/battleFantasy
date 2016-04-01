@@ -1,7 +1,9 @@
 # battleFantasy
-> Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
->> Version: 0.4.19.0.0
+> Personal Project using [Phaser v2.4.6 ](http://phaser.io/). Updates will be added as they are made.
+>> Version: 0.6.17.0.0
 
+* Able to pick begining stats
+* Added Stats for player
 * World(3000,3000) Added
 * Death Added
 * Battle System Added
