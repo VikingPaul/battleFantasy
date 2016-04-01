@@ -2,6 +2,8 @@
 > Personal Project using [Phaser v2.4.6 ](http://phaser.io/). Updates will be added as they are made.
 >> Version: 0.7.16.0.0
 
+> Please send all bugs to me so they can be fixed.
+
 * Enemies have stats that effect the gameplay
 * Able to pick begining stats
 * Added Stats for player
