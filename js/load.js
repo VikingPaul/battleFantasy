@@ -1,5 +1,6 @@
 var playerStats = {}
 playerStats.deathCount = 0
+playerStats.Lvl = 0
 var loadState = {
   preload: function() {
     var loadingLabel = game.add.text(80, 150, 'loading...',

@@ -4,6 +4,7 @@ var enemyRemainingHealth
 var enemyHealthLabel
 var enemyAttack
 var turn
+var enemyExp
 var battleState = {
   create: function() {
     turn = 1
@@ -41,9 +42,12 @@ var battleState = {
     selector.animations.play('default')
     let randEnemy = Math.floor(Math.random()*6+1)
     enemyTotalHealth = Math.floor(Math.random()*randEnemy+10)
+    let enemyLvl = playerStats.Lvl + 1
+    enemyExp = Math.floor(Math.random()*enemyLvl+Math.floor(Math.random()*10+3*playerStats.Lvl))
+    console.log(enemyLvl, enemyExp);
     enemyRemainingHealth = parseInt(enemyTotalHealth)
-    enemyAttack = Math.floor(Math.random()*5+1)
-    enemySpeed = Math.floor(Math.random()*5+1)
+    enemyAttack = Math.floor(Math.random()*3*enemyLvl+1*playerStats.Lvl)
+    enemySpeed = Math.floor(Math.random()*3*enemyLvl+1*playerStats.Lvl)
     switch (randEnemy) {
       case 1:
         enemy = game.add.sprite(0,150, 'basicRedEnemy')
