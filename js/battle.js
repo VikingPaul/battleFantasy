@@ -41,17 +41,16 @@ var battleState = {
     selector.animations.add('default', [0, 1], 2, true)
     selector.animations.play('default')
     let randEnemy = Math.floor(Math.random()*6+1)
-    enemyTotalHealth = Math.floor(Math.random()*randEnemy+10)
     let enemyLvl = playerStats.Lvl + 1
-    enemyExp = Math.floor(Math.random()*enemyLvl+Math.floor(Math.random()*10+3*playerStats.Lvl))
-    console.log(enemyLvl, enemyExp);
+    enemyTotalHealth = Math.floor(Math.random()*randEnemy+10*enemyLvl)
+    enemyExp = Math.floor(Math.random()*enemyLvl+Math.floor(Math.random()*10+3*playerStats.Lvl))+1
     enemyRemainingHealth = parseInt(enemyTotalHealth)
-    enemyAttack = Math.floor(Math.random()*3*enemyLvl+1*playerStats.Lvl)
-    enemySpeed = Math.floor(Math.random()*3*enemyLvl+1*playerStats.Lvl)
+    enemyAttack = Math.floor(Math.random()*3*enemyLvl+enemyLvl)
+    enemySpeed = Math.floor(Math.random()*3*enemyLvl+enemyLvl)
     switch (randEnemy) {
       case 1:
         enemy = game.add.sprite(0,150, 'basicRedEnemy')
-        var enemyLabel = game.add.text(0,game.world.height-200, 'RED!', 
+        var enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} RED!`, 
           {
             font: '50px Arial',
             fill: '#000000'
@@ -59,7 +58,7 @@ var battleState = {
         break;
       case 2:
         enemy = game.add.sprite(0,150, 'basicGreenEnemy')
-        var enemyLabel = game.add.text(0,game.world.height-200, 'GREEN!', 
+        var enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} GREEN!`, 
           {
             font: '50px Arial',
             fill: '#000000'
@@ -67,7 +66,7 @@ var battleState = {
         break;
       case 3:
         enemy = game.add.sprite(0,150, 'basicLightBlueEnemy')
-        var enemyLabel = game.add.text(0,game.world.height-200, 'LIGHT BLUE!', 
+        var enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} LIGHT BLUE!`, 
           {
             font: '50px Arial',
             fill: '#000000'
@@ -75,7 +74,7 @@ var battleState = {
         break;
       case 4:
         enemy = game.add.sprite(0,150, 'basicPurpleEnemy')
-        var enemyLabel = game.add.text(0,game.world.height-200, 'PURPLE!', 
+        var enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} PURPLE!`, 
           {
             font: '50px Arial',
             fill: '#000000'
@@ -83,7 +82,7 @@ var battleState = {
         break;
       case 5:
         enemy = game.add.sprite(0,150, 'basicBlueEnemy')
-        var enemyLabel = game.add.text(0,game.world.height-200, 'BLUE!', 
+        var enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} BLUE!`, 
           {
             font: '50px Arial',
             fill: '#000000'
@@ -91,7 +90,7 @@ var battleState = {
         break;
       case 6:
         enemy = game.add.sprite(0,150, 'basicYellowEnemy')
-        var enemyLabel = game.add.text(0,game.world.height-200, 'RED!', 
+        var enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} YELLOW!`, 
           {
             font: '50px Arial',
             fill: '#000000'

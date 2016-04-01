@@ -10,30 +10,26 @@ var statsState = {
     enterNum = 0
     statsLeft = 5
     statsTotal = 5
-    playerHeight = 0
-    playerWidth = 0
-    playerStats.strength = 0
-    playerStats.magic = 0
-    playerStats.speed = 0
-    statsLabel = game.add.text(300,80, 'Choose Starting Stats: 5', 
+
+    statsLabel = game.add.text(300,80, 'Choose Stats: 5', 
     {
       font: '50px Arial',
       fill: '#ffffff'
     });
     statsLabel.anchor.setTo(.5, .5)
-    strengthLabel = game.add.text(300,150, '0 :Strength', 
+    strengthLabel = game.add.text(300,150, `${playerStats.strength} :Strength`, 
     {
       font: '50px Arial',
       fill: '#ffffff'
     });
     strengthLabel.anchor.setTo(.5, .5)
-    speedLabel = game.add.text(300,220, '0 :Speed', 
+    speedLabel = game.add.text(300,220, `${playerStats.speed} :Speed`, 
     {
       font: '50px Arial',
       fill: '#ffffff'
     });
     speedLabel.anchor.setTo(.5, .5)
-    magicLabel = game.add.text(300,290, '0 :Magic', 
+    magicLabel = game.add.text(300,290, `${playerStats.magic} :Magic`, 
     {
       font: '50px Arial',
       fill: '#ffffff'
@@ -74,7 +70,7 @@ var statsState = {
     }
   },
   updateText: function() {
-    statsLabel.setText(`Choose Starting Stats: ${statsLeft}`)
+    statsLabel.setText(`Choose Stats: ${statsLeft}`)
     strengthLabel.setText(`${playerStats.strength} :Strength`)
     speedLabel.setText(`${playerStats.speed} :Speed`)
     magicLabel.setText(`${playerStats.magic} :Magic`)

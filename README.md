@@ -1,9 +1,10 @@
 # battleFantasy
 > Personal Project using [Phaser v2.4.6 ](http://phaser.io/). Updates will be added as they are made.
->> Version: 0.8.15.0.0
+>> Version: 0.9.14.0.0
 
 > Please send all bugs to me so they can be fixed.
 
+* Level system added.
 * Enemies have levels and Exp. based on said levels.
 * Enemies have stats that effect the gameplay
 * Able to pick begining stats
