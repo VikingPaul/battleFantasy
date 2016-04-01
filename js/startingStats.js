@@ -1,4 +1,3 @@
-var playerStats = {}
 var statsLeft
 var statsTotal
 var statsLabel

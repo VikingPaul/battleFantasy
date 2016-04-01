@@ -1,7 +1,8 @@
 # battleFantasy
 > Personal Project using [Phaser v2.4.6 ](http://phaser.io/). Updates will be added as they are made.
->> Version: 0.6.17.0.0
+>> Version: 0.7.16.0.0
 
+* Enemies have stats that effect the gameplay
 * Able to pick begining stats
 * Added Stats for player
 * World(3000,3000) Added

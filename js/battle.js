@@ -3,8 +3,10 @@ var EnemyTotalHealth
 var enemyRemainingHealth
 var enemyHealthLabel
 var enemyAttack
+var turn
 var battleState = {
   create: function() {
+    turn = 1
     game.world.resize(900, 600);
     ground = game.add.group()
     ground.create(0,0, 'battleOutdoorGrass')
@@ -40,8 +42,8 @@ var battleState = {
     let randEnemy = Math.floor(Math.random()*6+1)
     enemyTotalHealth = Math.floor(Math.random()*randEnemy+10)
     enemyRemainingHealth = parseInt(enemyTotalHealth)
-    enemyAttack = 1
-    enemySpeed = 1
+    enemyAttack = Math.floor(Math.random()*5+1)
+    enemySpeed = Math.floor(Math.random()*5+1)
     switch (randEnemy) {
       case 1:
         enemy = game.add.sprite(0,150, 'basicRedEnemy')
@@ -109,6 +111,10 @@ var battleState = {
     cursors = game.input.keyboard.createCursorKeys();
   },
   update: function() {
+    if (enemySpeed > playerStats.speed && turn === 1) {
+      turn++
+      battleState.enemyAttack()
+    }
     if (enemyRemainingHealth <= 0) {
       battleState.start()
     }
@@ -145,8 +151,10 @@ var battleState = {
       } else if (selector.world.x <= 560 && selector.world.y >= 545) {
         console.log("items");
       } else if (selector.world.x >= 730 && selector.world.y >= 545) {
-        if (enemySpeed < playerStats.speed+playerStats.strength){
+        if (enemySpeed < Math.floor(Math.random()*playerStats.speed+playerStats.strength)){
           battleState.run()
+        } else {
+          battleState.enemyAttack()
         }
       }
     }
