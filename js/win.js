@@ -22,22 +22,22 @@ var winState = {
         fill: '#000000'
     });
     playerStats.Exp += enemyExp
-    if (playerStats.Exp >= 100+50*(playerStats.Lvl)) {
+    if (playerStats.Exp >= 50+50*(playerStats.Lvl)) {
       var lvlUpLabel = game.add.text(80,145, `LEVEL UP!`, 
         {
           font: '25px Arial',
           fill: '#000000'
       });
       levelUp = true
-      playerStats.Exp -= 100+50*(playerStats.Lvl)
+      playerStats.Exp -= 50+50*(playerStats.Lvl)
       playerStats.Lvl++
-      var toNextLevelLabel = game.add.text(80,165, `${playerStats.Exp} / ${100*(playerStats.Lvl+1)}`, 
+      var toNextLevelLabel = game.add.text(80,165, `${playerStats.Exp} / ${50+50*(playerStats.Lvl)}`, 
         {
           font: '25px Arial',
           fill: '#000000'
       });
     } else {
-      var toNextLevelLabel = game.add.text(80,145, `${playerStats.Exp} / ${100*(playerStats.Lvl+1)}`, 
+      var toNextLevelLabel = game.add.text(80,145, `${playerStats.Exp} / ${50+50*(playerStats.Lvl)}`, 
         {
           font: '25px Arial',
           fill: '#000000'

@@ -1,8 +1,14 @@
 # battleFantasy
 > Personal Project using [Phaser v2.4.6 ](http://phaser.io/). Updates will be added as they are made.
->> Version: 0.10.13.0.0
+>> Version: 0.10.13.0.1
 
 > Please send all bugs to me so they can be fixed.
+
+> ## Bugs
+
+* Keeps Exp after death. (Honestly I don't think this one is that bad right now. SO I'm putting off fixing it.)
+
+> Features
 
 * Pause menu added. Will add more to it asI add more features.
 * Level system added.

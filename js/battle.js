@@ -41,9 +41,9 @@ var battleState = {
     selector.animations.add('default', [0, 1], 2, true)
     selector.animations.play('default')
     let randEnemy = Math.floor(Math.random()*6+1)
-    let enemyLvl = playerStats.Lvl + 1
+    let enemyLvl = playerStats.Lvl
     enemyTotalHealth = Math.floor(Math.random()*randEnemy+10*enemyLvl)
-    enemyExp = Math.floor(Math.random()*enemyLvl+Math.floor(Math.random()*10+3*playerStats.Lvl))+1
+    enemyExp = Math.floor(Math.random()*enemyLvl+Math.floor(Math.random()*10+3*playerStats.Lvl))
     enemyRemainingHealth = parseInt(enemyTotalHealth)
     enemyAttack = Math.floor(Math.random()*3*enemyLvl+enemyLvl)
     enemySpeed = Math.floor(Math.random()*3*enemyLvl+enemyLvl)

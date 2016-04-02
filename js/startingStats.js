@@ -1,5 +1,5 @@
-var statsLeft
-var statsTotal
+var statsLeft = 5
+var statsTotal = 5
 var statsLabel
 var strengthLabel
 var speedLabel
@@ -8,10 +8,11 @@ var enterNum
 var statsState = {
   create: function() {
     enterNum = 0
-    statsLeft = 5
-    statsTotal = 5
-
-    statsLabel = game.add.text(300,80, 'Choose Stats: 5', 
+    if (playerStats.Lvl > 1) {
+      statsLeft += 5
+      statsTotal += 5
+    }
+    statsLabel = game.add.text(300,80, `Choose Stats: ${statsLeft}`, 
     {
       font: '50px Arial',
       fill: '#ffffff'

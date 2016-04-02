@@ -1,20 +1,20 @@
 var playerHeight
 var playerWidth
+playerStats.strength = 0
+playerStats.magic = 0
+playerStats.speed = 0
 var menuState = {
   create: function() {
     playerHeight = 0
     playerWidth = 0
     gameCameraX = 0
     gameCameraY = 0
-    playerStats.strength = 0
-    playerStats.magic = 0
-    playerStats.speed = 0
     var nameLabel = game.add.text(80,80, 'battleFantasy', 
     {
       font: '50px Arial',
       fill: '#ffffff'
     });
-    var versionLabel = game.add.text(390,90, '0.10.13.0.0', 
+    var versionLabel = game.add.text(390,90, '0.10.13.0.1', 
     {
       font: '10px Arial',
       fill: '#ffffff'
