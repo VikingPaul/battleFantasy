@@ -1,5 +1,5 @@
-var gameCameraY = 0
-var gameCameraX = 0
+var gameCameraY
+var gameCameraX
 var worldState = {
   create: function() {
     game.world.resize(3000, 3000);
@@ -25,6 +25,8 @@ var worldState = {
     cursors = game.input.keyboard.createCursorKeys();
   },
   update: function() {
+    var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    spaceKey.onDown.addOnce(this.pause, this);
     //  Collide the player and the stars with the platforms
     game.physics.arcade.collide(player);
 
@@ -65,15 +67,18 @@ var worldState = {
     } else {
       player.animations.stop()
     }
+  },
+  pause: function() {
+    game.state.start('pause')
   }
 }
 function battleTest() {
+  gameCameraX = game.camera.x
+  gameCameraY = game.camera.y
   playerHeight = player.world.y
   playerWidth = player.world.x
   let randNum = Math.floor(Math.random()*100 + 1)
   if (randNum > 99) {
-    gameCameraX = game.camera.x
-    gameCameraY = game.camera.y
     game.state.start('battle')
   }
 }

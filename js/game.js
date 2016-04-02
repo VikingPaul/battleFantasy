@@ -8,5 +8,6 @@ game.state.add('win', winState)
 game.state.add('escape', runState)
 game.state.add('death', deathState)
 game.state.add('stats', statsState)
+game.state.add('pause', pauseState)
 
 game.state.start('load')

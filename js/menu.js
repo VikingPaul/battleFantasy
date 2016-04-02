@@ -4,6 +4,8 @@ var menuState = {
   create: function() {
     playerHeight = 0
     playerWidth = 0
+    gameCameraX = 0
+    gameCameraY = 0
     playerStats.strength = 0
     playerStats.magic = 0
     playerStats.speed = 0
@@ -12,7 +14,7 @@ var menuState = {
       font: '50px Arial',
       fill: '#ffffff'
     });
-    var versionLabel = game.add.text(390,90, '0.9.14.0.0', 
+    var versionLabel = game.add.text(390,90, '0.10.13.0.0', 
     {
       font: '10px Arial',
       fill: '#ffffff'
