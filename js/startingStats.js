@@ -5,6 +5,7 @@ var strengthLabel
 var speedLabel
 var magicLabel
 var enterNum
+var beginning = true
 var statsState = {
   create: function() {
     enterNum = 0
@@ -105,10 +106,15 @@ var statsState = {
   },
   next: function() {
     enterNum++
-    if (enterNum === 3) {
+    if (enterNum === 3 && beginning) {
       playerStats.maxHealth = playerStats.strength*3+playerStats.speed+10
       playerStats.currentHealth = playerStats.maxHealth
+      beginning = false
       game.state.start('equip')
+    } else if (enterNum === 3 && !beginning) {
+      playerStats.maxHealth = playerStats.strength*3+playerStats.speed+10
+      playerStats.currentHealth = playerStats.maxHealth
+      game.state.start('world')
     }
   }
 }

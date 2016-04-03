@@ -143,7 +143,7 @@ var battleState = {
     var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     if (enterKey.isDown) {
       if (selector.world.x <= 560 && selector.world.y <= 455) {
-          enemyRemainingHealth = enemyRemainingHealth-playerStats.strength*3+playerStats.weapon.stats[0]
+          enemyRemainingHealth = enemyRemainingHealth-(playerStats.strength*3+playerStats.weapon.stats[0])
           battleState.updateText();
           if (enemyRemainingHealth <= 0) {
             battleState.start()
