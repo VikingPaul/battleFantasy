@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.11.12.3
+>> Version: 0.12.11.3
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -16,12 +16,13 @@
 
 > Please send all bugs to me so they can be fixed.
 
-* None of the item menus work.
+* Items don't work durring battle.
 * Spacebar wins all battles. (Will fix right before v.1)
 * Keeps Exp after death. (Honestly I don't think this one is that bad right now. SO I'm putting off fixing it.)
 
 >> Features
 
+* Items Added and are accessible through the pause menu.
 * Equipment Added. You can choose at the begining.
 * Pause menu added. Will add more to it asI add more features.
 * Level system added.

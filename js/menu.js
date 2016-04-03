@@ -14,7 +14,7 @@ var menuState = {
       font: '50px Arial',
       fill: '#ffffff'
     });
-    var versionLabel = game.add.text(390,90, '0.11.12.3', 
+    var versionLabel = game.add.text(390,90, '0.12.11.3', 
     {
       font: '10px Arial',
       fill: '#ffffff'

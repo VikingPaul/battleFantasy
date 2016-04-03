@@ -21,7 +21,13 @@ var pauseState = {
         font: '50px Arial',
         fill: '#000000'
     });
-    var exitLabel = game.add.text(700,210, 'Exit', 
+    var equipLabel = game.add.text(700,210, 'Equip', 
+      {
+        font: '50px Arial',
+        fill: '#000000'
+    });
+
+    var exitLabel = game.add.text(700,280, 'Exit', 
       {
         font: '50px Arial',
         fill: '#000000'
@@ -32,24 +38,28 @@ var pauseState = {
     selector.animations.play('default')
   },
   update: function() {
-    if (selector.world.y >= 210 || selector.world.y <= 0 || selector.world.y === 140 || selector.world.y === 70) {
+    if (selector.world.y >= 280 || selector.world.y <= 0 || selector.world.y === 140 || selector.world.y === 70 || selector.world.y === 210) {
       selector.body.velocity.y = 0
     }
     if (cursors.up.isDown && selector.world.y >= 5) {
       selector.body.velocity.y = -150
-    } else if (cursors.down.isDown && selector.world.y <= 215) {
+    } else if (cursors.down.isDown && selector.world.y <= 285) {
       selector.body.velocity.y = 150
     }
     var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     if (enterKey.isDown) {
-      if (selector.world.y >= 210) {
+      if (selector.world.y >= 280) {
         pauseState.start()
       } else if (selector.world.y <= 5) {
+        lastPage = "pause"
         console.log("Items");
+        game.state.start('useItem')
       } else if (selector.world.y >= 60 && selector.world.y <= 80) {
         console.log("Stats");
       } else if (selector.world.y >= 130 && selector.world.y <= 150) {
         console.log("Abilities");
+      } else if (selector.world.y >= 200 && selector.world.y <= 220) {
+        console.log("Equip");
       }
     }
   },

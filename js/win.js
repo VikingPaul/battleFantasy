@@ -1,4 +1,5 @@
 playerStats.Exp = 0
+playerStats.Luck = 0
 var levelUp
 var winState = {
   create: function() {
@@ -42,7 +43,21 @@ var winState = {
           font: '25px Arial',
           fill: '#000000'
       });
-
+    }
+    if (Math.floor(Math.random()*100+1)-ememyDropRate > 75-playerStats.Luck) {
+      let potionRand = Math.floor(Math.random()*3+1)
+      if (potionRand === 1) {
+        items.Potions[0].Owned++
+        game.add.text(80,200, `You found: ${items.Potions[0].Name}`)
+      } else if (potionRand === 2) {
+        items.Potions[4].Owned++
+        game.add.text(80,200, `You found: ${items.Potions[4].Name}`)
+      } else if (potionRand === 3) {
+        items.Granades[0].Owned++
+        game.add.text(80,200, `You found: ${items.Granades[0].Name}`)
+      } else {
+        alert("404 ERROR: Potion not found")
+      }
     }
   },
   update: function() {

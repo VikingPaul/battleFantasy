@@ -2,12 +2,17 @@ var playerStats = {}
 playerStats.deathCount = 0
 playerStats.Lvl = 1
 var equipment
+var items
 var loadState = {
   preload: function() {
     var equip = new XMLHttpRequest();
-    equip.addEventListener("load", loadState.XHR);
+    equip.addEventListener("load", loadState.XHREquip);
     equip.open("GET", "../json/equipment.json");
     equip.send()
+    var item = new XMLHttpRequest();
+    item.addEventListener("load", loadState.XHRItem);
+    item.open("GET", "../json/items.json");
+    item.send()
     var loadingLabel = game.add.text(80, 150, 'loading...',
       {
         front: '30px Courier',
@@ -51,7 +56,11 @@ var loadState = {
   create: function() {
     game.state.start('menu')
   },
-  XHR: function() {
+  XHREquip: function() {
     equipment = JSON.parse(this.responseText)
+  },
+  XHRItem: function() {
+    items = JSON.parse(this.responseText)
+    console.log("items", items);
   }
 }

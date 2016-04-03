@@ -1,5 +1,6 @@
 var gameCameraY
 var gameCameraX
+var lastPage
 var worldState = {
   create: function() {
     game.world.resize(3000, 3000);

@@ -5,6 +5,7 @@ var armorLabel
 var equipNum = 0
 var equipState = {
   create: function() {
+    items.Potions[0].Owned = 5
     enterNum = 0
     weaponLabel = game.add.text(450,80, `Weapon: Beginner Sword`, 
     {

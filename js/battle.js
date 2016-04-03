@@ -5,8 +5,10 @@ var enemyHealthLabel
 var enemyAttack
 var turn
 var enemyExp
+var ememyDropRate
 var battleState = {
   create: function() {
+    ememyDropRate=0
     turn = 1
     game.world.resize(900, 600);
     ground = game.add.group()
