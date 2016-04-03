@@ -1,8 +1,13 @@
 var playerStats = {}
 playerStats.deathCount = 0
 playerStats.Lvl = 1
+var equipment
 var loadState = {
   preload: function() {
+    var equip = new XMLHttpRequest();
+    equip.addEventListener("load", loadState.XHR);
+    equip.open("GET", "../json/equipment.json");
+    equip.send()
     var loadingLabel = game.add.text(80, 150, 'loading...',
       {
         front: '30px Courier',
@@ -46,4 +51,7 @@ var loadState = {
   create: function() {
     game.state.start('menu')
   },
+  XHR: function() {
+    equipment = JSON.parse(this.responseText)
+  }
 }

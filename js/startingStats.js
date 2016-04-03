@@ -108,7 +108,7 @@ var statsState = {
     if (enterNum === 3) {
       playerStats.maxHealth = playerStats.strength*3+playerStats.speed+10
       playerStats.currentHealth = playerStats.maxHealth
-      game.state.start('world')
+      game.state.start('equip')
     }
   }
 }

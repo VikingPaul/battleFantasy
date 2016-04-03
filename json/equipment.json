@@ -1,0 +1,60 @@
+{
+  "Armor": [{
+      "Beginner": {
+        "Name": "Beginner Light Armor",
+        "Owned": false,
+        "Equiped": false,
+        "Stats": [1,2,0]
+    }},
+      {"Beginner": {
+        "Name": "Beginner Medium Armor",
+        "Owned": false,
+        "Equiped": false,
+        "Stats": [2,1,0]
+    }},
+      {"Beginner": {
+        "Name": "Beginner Heavy Armor",
+        "Owned": false,
+        "Equiped": false,
+        "Stats": [5,-2,0]
+    }
+  }],
+  "Weapon": [{
+      "Beginner": {
+        "Name": "Beginner Sword",
+        "Owned": false,
+        "Equiped": false,
+        "Stats": [3,0,0]
+    }},
+      {"Beginner": {
+        "Name": "Beginner Dagger",
+        "Owned": false,
+        "Equiped": false,
+        "Stats": [1,2,0]
+      }
+    },
+      {"Beginner": {
+        "Name": "Beginner Staff",
+        "Owned": false,
+        "Equiped": false,
+        "Stats": [1,0,2]
+      }
+    }
+  ],
+  "Special": [{
+      "Beginner": {
+        "Name": "Beginner Bracer",
+        "Owned": false,
+        "Equiped": false,
+        "Stats": [[1,0,0],[1,0,0]]
+      }
+    },
+      {"Beginner": {
+        "Name": "Beginner Grieves",
+        "Owned": false,
+        "Equiped": false,
+        "Stats": [[1,0,0],[1,0,0]]
+      }
+    }
+  ]
+}

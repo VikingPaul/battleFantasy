@@ -143,7 +143,7 @@ var battleState = {
     var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     if (enterKey.isDown) {
       if (selector.world.x <= 560 && selector.world.y <= 455) {
-          enemyRemainingHealth = enemyRemainingHealth-playerStats.strength*3+playerStats.magic
+          enemyRemainingHealth = enemyRemainingHealth-playerStats.strength*3+playerStats.weapon.stats[0]
           battleState.updateText();
           if (enemyRemainingHealth <= 0) {
             battleState.start()
@@ -154,7 +154,7 @@ var battleState = {
       } else if (selector.world.x <= 560 && selector.world.y >= 545) {
         console.log("items");
       } else if (selector.world.x >= 730 && selector.world.y >= 545) {
-        if (enemySpeed < Math.floor(Math.random()*playerStats.speed+playerStats.strength)){
+        if (enemySpeed < Math.floor(Math.random()*playerStats.speed+playerStats.armor.stats[2])){
           battleState.run()
         } else {
           battleState.enemyAttack()
@@ -174,8 +174,10 @@ var battleState = {
   },
   enemyAttack: function() {
     game.paused = !game.paused;
-    if (Math.floor(Math.random()*(playerStats.speed+playerStats.strength)+1) <= enemySpeed) {
-      playerStats.currentHealth = playerStats.currentHealth - enemyAttack
+    if (Math.floor(Math.random()*(playerStats.speed+playerStats.armor.stats[2])) <= enemySpeed) {
+      if (-enemyAttack+playerStats.weapon.stats[2] < 0) {
+        playerStats.currentHealth = playerStats.currentHealth - enemyAttack+playerStats.weapon.stats[2]
+      }
     } 
     playerHealthLabel.setText(`${playerStats.maxHealth} / ${playerStats.currentHealth}`)
     setTimeout(battleState.resume(), 3000)
