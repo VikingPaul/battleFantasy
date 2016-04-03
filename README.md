@@ -1,10 +1,20 @@
 # battleFantasy
-> Personal Project using [Phaser v2.4.6 ](http://phaser.io/). Updates will be added as they are made.
 >> Version: 0.11.12.3
 
-> Please send all bugs to me so they can be fixed.
+> Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
+
+---------------------------------------------------------
+![](https://raw.githubusercontent.com/VikingPaul/battleFantasy/master/readmePics/beginningState.png "Opening")
+
+![](https://raw.githubusercontent.com/VikingPaul/battleFantasy/master/readmePics/attackState.png "Battle")
+
+![](https://raw.githubusercontent.com/VikingPaul/battleFantasy/master/readmePics/deathScreen.png "Death")
+
+---------------------------------------------------------
 
 > ## Bugs
+
+> Please send all bugs to me so they can be fixed.
 
 * None of the item menus work.
 * Spacebar wins all battles. (Will fix right before v.1)
