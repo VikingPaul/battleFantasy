@@ -1,4 +1,4 @@
-console.log('%c battleFantasy v.0.12.11.3 Developed by: VikingPaul ', 'background: #222; color: #bada55');
+console.log('%c battleFantasy v.0.13.12.3 Developed by: VikingPaul ', 'background: #222; color: #bada55');
 var game = new Phaser.Game(900,600, Phaser.AUTO, '')
 game.state.add('load', loadState)
 game.state.add('menu', menuState)

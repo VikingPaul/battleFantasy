@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.12.11.3
+>> Version: 0.13.10.3
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -22,6 +22,7 @@
 
 >> Features
 
+* New animation for when you die.
 * Items Added and are accessible through the pause menu.
 * Equipment Added. You can choose at the begining.
 * Pause menu added. Will add more to it asI add more features.

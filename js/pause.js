@@ -38,6 +38,8 @@ var pauseState = {
     selector.animations.play('default')
   },
   update: function() {
+    var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    spaceKey.onDown.addOnce(this.start, this);
     if (selector.world.y >= 280 || selector.world.y <= 0 || selector.world.y === 140 || selector.world.y === 70 || selector.world.y === 210) {
       selector.body.velocity.y = 0
     }
