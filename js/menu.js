@@ -14,7 +14,7 @@ var menuState = {
       font: '50px Arial',
       fill: '#ffffff'
     });
-    var versionLabel = game.add.text(390,90, '0.12.11.3', 
+    var versionLabel = game.add.text(390,90, '0.14.9.3', 
     {
       font: '10px Arial',
       fill: '#ffffff'
@@ -29,6 +29,6 @@ var menuState = {
     spaceKey.onDown.addOnce(this.start, this);
   },
   start: function() {
-    game.state.start('stats')
+    game.state.start('class')
   }
 }

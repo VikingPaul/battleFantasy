@@ -92,6 +92,10 @@ var winState = {
     game.state.start('world')
   },
   levelUp: function() {
-    game.state.start('stats')
+    if (playerStats.Lvl%5 === 0){
+      game.state.start('class')
+    } else {
+      game.state.start('stats')
+    }
   }
 }
