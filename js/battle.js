@@ -45,10 +45,12 @@ var battleState = {
     let randEnemy = Math.floor(Math.random()*6+1)
     let enemyLvl = playerStats.Lvl
     enemyTotalHealth = Math.floor(Math.random()*randEnemy+10*enemyLvl)
-    enemyExp = Math.floor(Math.random()*enemyLvl+Math.floor(Math.random()*10+5*enemyLvl))
     enemyRemainingHealth = parseInt(enemyTotalHealth)
-    enemyAttack = Math.floor(Math.random()*3*enemyLvl+enemyLvl)
-    enemySpeed = Math.floor(Math.random()*3*enemyLvl+enemyLvl)
+    let eNum = Math.floor(Math.random()*3*enemyLvl/5+enemyLvl)
+    enemyAttack = eNum
+    enemySpeed = Math.ceil((3*enemyLvl/5+enemyLvl*3)-eNum)
+    eNum += enemySpeed
+    enemyExp = Math.floor(Math.random()*eNum+Math.floor(Math.random()*5+5*enemyLvl))
     switch (randEnemy) {
       case 1:
         enemy = game.add.sprite(0,150, 'basicRedEnemy')
