@@ -52,6 +52,7 @@ var loadState = {
 ///////////////////  background  /////////////////////////
 //////////////////////////////////////////////////////////
     game.load.image('slateGrey', '../pixels/textBackground/slategrey.png')
+    game.load.spritesheet('deathScene', '../pixels/textBackground/deathScene.png', 195, 195)
   },
   create: function() {
     game.state.start('menu')
@@ -61,6 +62,5 @@ var loadState = {
   },
   XHRItem: function() {
     items = JSON.parse(this.responseText)
-    console.log("items", items);
   }
 }

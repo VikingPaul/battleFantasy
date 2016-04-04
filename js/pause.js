@@ -52,7 +52,6 @@ var pauseState = {
         pauseState.start()
       } else if (selector.world.y <= 5) {
         lastPage = "pause"
-        console.log("Items");
         game.state.start('useItem')
       } else if (selector.world.y >= 60 && selector.world.y <= 80) {
         console.log("Stats");

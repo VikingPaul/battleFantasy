@@ -1,15 +1,16 @@
-var statsLeft = 5
-var statsTotal = 5
+var statsLeft = 0
+var statsTotal = 0
 var statsLabel
 var strengthLabel
 var speedLabel
 var magicLabel
 var enterNum
 var beginning = true
+var death = false
 var statsState = {
   create: function() {
     enterNum = 0
-    if (playerStats.Lvl > 1) {
+    if (!death) {
       statsLeft += 5
       statsTotal += 5
     }
@@ -106,6 +107,7 @@ var statsState = {
   },
   next: function() {
     enterNum++
+    death = false
     if (enterNum === 3 && beginning) {
       playerStats.maxHealth = playerStats.strength*3+playerStats.speed+10
       playerStats.currentHealth = playerStats.maxHealth

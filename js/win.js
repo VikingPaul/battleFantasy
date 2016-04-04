@@ -45,7 +45,15 @@ var winState = {
       });
     }
     if (Math.floor(Math.random()*100+1)-ememyDropRate > 75-playerStats.Luck) {
-      let potionRand = Math.floor(Math.random()*3+1)
+      let potionsNum
+      if (playerStats.Lvl < 4) {
+        potionsNum = 3
+      } else if (playerStats.Lvl < 10) {
+        potionsNum = 5
+      } else if (playerStats.Lvl < 25) {
+        potionsNum = 7
+      }
+      let potionRand = Math.floor(Math.random()*potionsNum+1)
       if (potionRand === 1) {
         items.Potions[0].Owned++
         game.add.text(80,200, `You found: ${items.Potions[0].Name}`)
@@ -55,6 +63,18 @@ var winState = {
       } else if (potionRand === 3) {
         items.Granades[0].Owned++
         game.add.text(80,200, `You found: ${items.Granades[0].Name}`)
+      } else if (potionRand === 4) {
+        items.Potions[1].Owned++
+        game.add.text(80,200, `You found: ${items.Potions[1].Name}`)
+      } else if (potionRand === 5) {
+        items.Potions[5].Owned++
+        game.add.text(80,200, `You found: ${items.Potions[5].Name}`)
+      } else if (potionRand === 6) {
+        items.Potions[2].Owned++
+        game.add.text(80,200, `You found: ${items.Potions[2].Name}`)
+      } else if (potionRand === 7) {
+        items.Potions[6].Owned++
+        game.add.text(80,200, `You found: ${items.Potions[6].Name}`)
       } else {
         alert("404 ERROR: Potion not found")
       }
