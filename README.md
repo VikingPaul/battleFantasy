@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.14.9.3
+>> Version: 0.15.8.2
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -18,10 +18,10 @@
 
 * If you don't choose a class you can get a free point to stats.
 * Spacebar wins all battles. (Will fix right before v.1)
-* Keeps Exp after death. (Honestly I don't think this one is that bad right now. SO I'm putting off fixing it.)
 
 >> Features
 
+* Money Added. Gain more when killing enemies.
 * Class Selection added. Doesn't effect game yet, but when abilities are added you'll gain new ones based on the class choice.
 * New animation for when you die.
 * Items Added and are accessible through the pause menu.

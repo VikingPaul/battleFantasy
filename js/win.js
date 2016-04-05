@@ -1,8 +1,10 @@
 playerStats.Exp = 0
 playerStats.Luck = 0
 var levelUp
+playerStats.Money = 0
 var winState = {
   create: function() {
+    playerStats.Money += enemyMoney
     levelUp = false
     menu = game.add.group()
     menu.create(0,0,'slateGrey')
@@ -44,6 +46,11 @@ var winState = {
           fill: '#000000'
       });
     }
+    game.add.text(80,210, `You found: ${enemyMoney} Gold`, 
+      {
+        font: '25px Arial',
+        fill: '#000000'
+    });
     if (Math.floor(Math.random()*100+1)-ememyDropRate > 75-playerStats.Luck) {
       let potionsNum
       if (playerStats.Lvl < 4) {

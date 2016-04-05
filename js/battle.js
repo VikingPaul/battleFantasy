@@ -13,6 +13,7 @@ var enemyLabel
 var itemText
 var enemyLvl
 var damage
+var enemyMoney
 var enemyResist = []
 var battleState = {
   create: function() {
@@ -73,6 +74,7 @@ var battleState = {
     enemySpeed = Math.ceil((3*enemyLvl/5+enemyLvl*3)-eNum)
     eNum += enemySpeed
     enemyExp = Math.floor(Math.random()*eNum+Math.floor(Math.random()*5+enemyArmor*enemyLvl))
+    enemyMoney = Math.floor(Math.random()*5+enemyLvl)
     for (let i in items.Granades[0].Type) {
       enemyResist[i] = 0
     }
