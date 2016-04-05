@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.14.9.4
+>> Version: 0.14.9.3
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -17,7 +17,6 @@
 > Please send all bugs to me so they can be fixed.
 
 * If you don't choose a class you can get a free point to stats.
-* Items don't work durring battle.
 * Spacebar wins all battles. (Will fix right before v.1)
 * Keeps Exp after death. (Honestly I don't think this one is that bad right now. SO I'm putting off fixing it.)
 
