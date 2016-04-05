@@ -5,8 +5,8 @@ playerStats.magic = 0
 playerStats.speed = 0
 var menuState = {
   create: function() {
-    playerHeight = 0
-    playerWidth = 0
+    playerHeight = 100
+    playerWidth = 100
     gameCameraX = 0
     gameCameraY = 0
     var nameLabel = game.add.text(80,80, 'battleFantasy', 

@@ -1,6 +1,9 @@
 var gameCameraY
 var gameCameraX
 var lastPage
+var hole
+var player
+var ledge
 var worldState = {
   create: function() {
     game.world.resize(3000, 3000);
@@ -8,17 +11,45 @@ var worldState = {
     game.camera.y = gameCameraY
     game.physics.startSystem(Phaser.Physics.ARCADE);
     ground = game.add.group()
+    hole = game.add.group()
+    hole.enableBody = true;
     let maxWidth = Math.ceil(game.world.width/96)
     let maxHeight = Math.ceil(game.world.height/96)
     for (let i = 0; i < maxHeight; i++) {
       for (let j = 0; j < maxWidth; j++) {
-        ground.create(j*96,i*96, 'grass')
+        if (i > 0 && i < maxHeight-1 && j > 0 && j < maxWidth-1) {
+          ground.create(j*96,i*96, 'grass')
+        } else if (i < 1 && j < 1) {
+          ledge = hole.create(j*96,i*96, "grassHole")
+          ledge.body.immovable = true;
+        } else if (i > maxHeight-2 && j >maxWidth-2) {
+          ledge = hole.create(j*96,i*96, "grassHole")
+          ledge.body.immovable = true;
+        } else if (i < 1 && j > maxWidth-2) {
+          ledge = hole.create(j*96,i*96, "grassHole")
+          ledge.body.immovable = true;
+        } else if (i > maxHeight-2 && j <1) {
+          ledge = hole.create(j*96,i*96, "grassHole")
+          ledge.body.immovable = true;
+        } else if (i < 1) {
+          ledge = hole.create(j*96,i*96, "grassHoleBottom")
+          ledge.body.immovable = true;
+        } else if (j > maxWidth-2) {
+          ledge = hole.create(j*96,i*96, "grassHoleLeft")
+          ledge.body.immovable = true;
+        } else if (j < 1) {
+          ledge = hole.create(j*96,i*96, "grassHoleRight")
+          ledge.body.immovable = true;
+        } else if (i > maxHeight-2) {
+          ledge = hole.create(j*96,i*96, "grassHoleTop")
+          ledge.body.immovable = true;
+        }
       }
     }
     player = game.add.sprite(playerWidth, playerHeight, 'characterMovement');
     game.physics.arcade.enable(player);
+    game.physics.arcade.enable(hole);
     player.body.collideWorldBounds = true;
-
     player.animations.add('left', [4, 5, 6, 7], 10, true)
     player.animations.add('right', [4, 5, 6, 7], 10, true)
     player.animations.add('up', [0, 1, 2, 3], 10, true)
@@ -26,10 +57,11 @@ var worldState = {
     cursors = game.input.keyboard.createCursorKeys();
   },
   update: function() {
+    game.physics.arcade.collide(player, hole)
     var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     spaceKey.onDown.addOnce(this.pause, this);
     //  Collide the player and the stars with the platforms
-    game.physics.arcade.collide(player);
+    game.physics.arcade.collide(player, hole);
 
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;

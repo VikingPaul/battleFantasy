@@ -6,6 +6,8 @@ var enemyAttack
 var turn
 var enemyExp
 var ememyDropRate
+var missLabel
+var enemyArmor
 var battleState = {
   create: function() {
     ememyDropRate=0
@@ -38,6 +40,12 @@ var battleState = {
         font: '50px Arial',
         fill: '#000000'
     });
+    missLabel = game.add.text(game.world.width-130,150, '', 
+      {
+        font: '50px Arial',
+        fill: '#000000'
+    });
+    missLabel.anchor.setTo()
     selector = game.add.sprite(560, 455, 'selector');
     game.physics.arcade.enable(selector);
     selector.animations.add('default', [0, 1], 2, true)
@@ -46,11 +54,12 @@ var battleState = {
     let enemyLvl = playerStats.Lvl
     enemyTotalHealth = Math.floor(Math.random()*randEnemy+10*enemyLvl)
     enemyRemainingHealth = parseInt(enemyTotalHealth)
-    let eNum = Math.floor(Math.random()*3*enemyLvl/5+enemyLvl)
+    eNum = Math.floor(Math.random()*3*enemyLvl/5+enemyLvl)
     enemyAttack = eNum
+    enemyArmor = Math.ceil(Math.random()*5+enemyLvl)
     enemySpeed = Math.ceil((3*enemyLvl/5+enemyLvl*3)-eNum)
     eNum += enemySpeed
-    enemyExp = Math.floor(Math.random()*eNum+Math.floor(Math.random()*5+5*enemyLvl))
+    enemyExp = Math.floor(Math.random()*eNum+Math.floor(Math.random()*5+enemyArmor*enemyLvl))
     switch (randEnemy) {
       case 1:
         enemy = game.add.sprite(0,150, 'basicRedEnemy')
@@ -147,7 +156,7 @@ var battleState = {
     var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     if (enterKey.isDown) {
       if (selector.world.x <= 560 && selector.world.y <= 455) {
-          enemyRemainingHealth = enemyRemainingHealth-(playerStats.strength*3+playerStats.weapon.stats[0])
+          enemyRemainingHealth = enemyRemainingHealth-(playerStats.strength*3+playerStats.weapon.stats[0])-enemyArmor
           battleState.updateText();
           if (enemyRemainingHealth <= 0) {
             battleState.start()
@@ -181,8 +190,11 @@ var battleState = {
     if (Math.floor(Math.random()*(playerStats.speed+playerStats.armor.stats[2])) <= enemySpeed) {
       if (-enemyAttack+playerStats.weapon.stats[2] < 0) {
         playerStats.currentHealth = playerStats.currentHealth - enemyAttack+playerStats.weapon.stats[2]
-      }
-    } 
+        missLabel.setText("")
+      } 
+    } else {
+      missLabel.setText("MISS")
+    }
     playerHealthLabel.setText(`${playerStats.maxHealth} / ${playerStats.currentHealth}`)
     setTimeout(battleState.resume(), 3000)
   },
