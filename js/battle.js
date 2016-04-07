@@ -194,10 +194,6 @@ var battleState = {
         }
       }
     }
-
-    var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    spaceKey.onDown.addOnce(this.start, this);
-  
   },
   updateText: function() {
     itemText.setText("")
@@ -259,40 +255,43 @@ var battleState = {
     document.addEventListener("keyup", numEvent)
     function numEvent(e) {
       if (e.code === "Digit1" && items.Potions[0].Owned >0) {
-      num = 0
-      document.removeEventListener("keyup", numEvent)
-      battleState.increaseHealthMana()
+        num = 0
+        document.removeEventListener("keyup", numEvent)
+        battleState.increaseHealthMana()
       } else if (e.code === "Digit2" && items.Potions[1].Owned >0) {
-      num = 1
-      document.removeEventListener("keyup", numEvent)
-      battleState.increaseHealthMana()
+        num = 1
+        document.removeEventListener("keyup", numEvent)
+        battleState.increaseHealthMana()
       } else if (e.code === "Digit3" && items.Potions[2].Owned >0) {
-      num = 2
-      document.removeEventListener("keyup", numEvent)
-      battleState.increaseHealthMana()
+        num = 2
+        document.removeEventListener("keyup", numEvent)
+        battleState.increaseHealthMana()
       } else if (e.code === "Digit4" && items.Potions[3].Owned >0) {
-      num = 3
-      document.removeEventListener("keyup", numEvent)
-      battleState.increaseHealthMana()
+        num = 3
+        document.removeEventListener("keyup", numEvent)
+        battleState.increaseHealthMana()
       } else if (e.code === "Digit5" && items.Potions[4].Owned >0) {
-      num = 4
-      document.removeEventListener("keyup", numEvent)
-      battleState.increaseHealthMana()
+        num = 4
+        document.removeEventListener("keyup", numEvent)
+        battleState.increaseHealthMana()
       } else if (e.code === "Digit6" && items.Potions[5].Owned >0) {
-      num = 5
-      document.removeEventListener("keyup", numEvent)
-      battleState.increaseHealthMana()
+        num = 5
+        document.removeEventListener("keyup", numEvent)
+        battleState.increaseHealthMana()
       } else if (e.code === "Digit7" && items.Potions[6].Owned >0) {
-      num = 6
-      document.removeEventListener("keyup", numEvent)
-      battleState.increaseHealthMana()
+        num = 6
+        document.removeEventListener("keyup", numEvent)
+        battleState.increaseHealthMana()
       } else if (e.code === "Digit8" && items.Granades[0].Owned >0) {
-      num = 0
-      document.removeEventListener("keyup", numEvent)
-      battleState.granade()
+        num = 0
+        document.removeEventListener("keyup", numEvent)
+        battleState.granade()
+      } else if (e.code === "Space") {
+        document.removeEventListener("keyup", numEvent)
+        battleState.updateText()
+        battleState.resume()
       }
     }
-    //battleState.useItem()
   },
   granade: function() {
     damage = 0

@@ -6,7 +6,7 @@ var player
 var ledge
 var worldState = {
   create: function() {
-    game.world.resize(3000, 3000);
+    game.world.resize(4000, 4000);
     game.camera.x = gameCameraX
     game.camera.y = gameCameraY
     game.physics.startSystem(Phaser.Physics.ARCADE);

@@ -5,6 +5,7 @@ var shopState = {
     pauseState.pause()
     pauseState.pause()
     shopState.updateText()
+    document.addEventListener("keyup", events)
   },
   update: function() {
     if (cursors.up.isDown) {
@@ -19,10 +20,9 @@ var shopState = {
     amountText.setText(`${amount}`)
     var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     if (spaceKey.isDown) {
-      // document.removeEventListener("keyup", shopState.events)
+      document.removeEventListener("keyup", events)
       game.state.start(lastPage)
     }
-    document.addEventListener("keyup", events)
     
   },
   updateText: function() {
@@ -80,23 +80,23 @@ var shopState = {
   }
 }
 var events = function(e) {
-      shopState.pause()
-      if (e.code === "Digit1" && items.Potions[0].Price*amount <= playerStats.Money) {
-      shopState.buyItem(0)
-      } else if (e.code === "Digit2" && items.Potions[1].Price*amount <= playerStats.Money) {
-      shopState.buyItem(1)
-      } else if (e.code === "Digit3" && items.Potions[2].Price*amount <= playerStats.Money) {
-      shopState.buyItem(2)
-      } else if (e.code === "Digit4" && items.Potions[3].Price*amount <= playerStats.Money) {
-      shopState.buyItem(3)
-      } else if (e.code === "Digit5" && items.Potions[4].Price*amount <= playerStats.Money) {
-      shopState.buyItem(4)
-      } else if (e.code === "Digit6" && items.Potions[5].Price*amount <= playerStats.Money) {
-      shopState.buyItem(5)
-      } else if (e.code === "Digit7" && items.Potions[6].Price*amount <= playerStats.Money) {
-      shopState.buyItem(6)
-      } else if (e.code === "Digit8" && items.Granades[0].Price*amount <= playerStats.Money) {
-      shopState.buyItem(7)
-      }
-      shopState.pause()
-    }
+  shopState.pause()
+  if (e.code === "Digit1" && items.Potions[0].Price*amount <= playerStats.Money) {
+  shopState.buyItem(0)
+  } else if (e.code === "Digit2" && items.Potions[1].Price*amount <= playerStats.Money) {
+  shopState.buyItem(1)
+  } else if (e.code === "Digit3" && items.Potions[2].Price*amount <= playerStats.Money) {
+  shopState.buyItem(2)
+  } else if (e.code === "Digit4" && items.Potions[3].Price*amount <= playerStats.Money) {
+  shopState.buyItem(3)
+  } else if (e.code === "Digit5" && items.Potions[4].Price*amount <= playerStats.Money) {
+  shopState.buyItem(4)
+  } else if (e.code === "Digit6" && items.Potions[5].Price*amount <= playerStats.Money) {
+  shopState.buyItem(5)
+  } else if (e.code === "Digit7" && items.Potions[6].Price*amount <= playerStats.Money) {
+  shopState.buyItem(6)
+  } else if (e.code === "Digit8" && items.Granades[0].Price*amount <= playerStats.Money) {
+  shopState.buyItem(7)
+  }
+  shopState.pause()
+}

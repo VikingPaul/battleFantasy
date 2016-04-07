@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.16.7.1
+>> Version: 0.16.7.0
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -16,7 +16,7 @@
 
 > Please send all bugs to me so they can be fixed.
 
-* Spacebar wins all battles. (Will fix right before v.1)
+* None
 
 >> Features
 
