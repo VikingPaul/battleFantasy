@@ -1,4 +1,4 @@
-console.log('%c battleFantasy v.0.15.8.2 Developed by: VikingPaul ', 'background: #222; color: #bada55');
+console.log('%c battleFantasy v.0.16.7.1 Developed by: VikingPaul ', 'background: #222; color: #bada55');
 var game = new Phaser.Game(900,600, Phaser.AUTO, '')
 game.state.add('load', loadState)
 game.state.add('menu', menuState)
@@ -12,5 +12,6 @@ game.state.add('pause', pauseState)
 game.state.add('equip', equipState)
 game.state.add('useItem', useItemState)
 game.state.add('class', classState)
+game.state.add('shop', shopState)
 
 game.state.start('load')

@@ -25,6 +25,15 @@ var loadState = {
     game.load.spritesheet('characterMovement', '../pixels/character/characterMovement.png', 96, 96);
     game.load.image('characterBattle', '../pixels/character/characterBattle.png');
 //////////////////////////////////////////////////////////
+////////////////////////  Stone  /////////////////////////
+//////////////////////////////////////////////////////////
+    game.load.image('stoneFloor', '../pixels/stone/stoneFloor.png')
+    game.load.image('stoneWall', '../pixels/stone/stoneWall.png')
+    game.load.image('stoneStairs', '../pixels/stone/stoneStairs.png')
+    game.load.image('stoneThrone', '../pixels/stone/stoneThrone.png')
+    game.load.image('stoneShop', '../pixels/stone/stoneShop.png')
+
+////////////////////////////////////////////////////////
 ////////////////////////  Grass  /////////////////////////
 //////////////////////////////////////////////////////////
     game.load.image('grass', '../pixels/grass/grass.png')

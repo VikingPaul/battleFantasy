@@ -44,6 +44,27 @@ var worldState = {
           ledge = hole.create(j*96,i*96, "grassHoleTop")
           ledge.body.immovable = true;
         }
+
+        if (i === 4 && j >= 1 && j <3) {
+          ledge = hole.create(i*96,j*96, "stoneWall")
+          ledge.body.immovable = true;
+        } else if (i === 6 && j >= 1 && j <3) {
+          ledge = hole.create(i*96,j*96, "stoneWall")
+          ledge.body.immovable = true;
+        } else if (i === 5 && j === 2) {
+          ledge = hole.create(i*96,j*96, "stoneShop")
+          ledge.body.immovable = true;
+        } else if (i >= 4 && i <= 6 && j === 1) {
+          ledge = hole.create(i*96,j*96, "stoneWall")
+          ledge.body.immovable = true;
+        } else if (i === 4 && j === 3) {
+          ledge = hole.create(i*96-16,j*96, "stoneWall")
+          ledge.body.immovable = true;
+        } else if (i === 6 && j === 3) {
+          ledge = hole.create(i*96+16,j*96, "stoneWall")
+          ledge.body.immovable = true;
+        }
+
       }
     }
     player = game.add.sprite(playerWidth, playerHeight, 'characterMovement');
@@ -60,6 +81,12 @@ var worldState = {
     game.physics.arcade.collide(player, hole)
     var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     spaceKey.onDown.addOnce(this.pause, this);
+    var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+
+    if (enterKey.isDown && player.world.y === 288 && player.world.x >= 464 && player.world.x <= 496) {
+      worldState.shop()
+    }
+
     //  Collide the player and the stars with the platforms
     game.physics.arcade.collide(player, hole);
 
@@ -103,6 +130,10 @@ var worldState = {
   },
   pause: function() {
     game.state.start('pause')
+  },
+  shop: function() {
+    lastPage = "world"
+    game.state.start('shop')
   }
 }
 function battleTest() {

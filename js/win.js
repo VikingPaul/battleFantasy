@@ -46,7 +46,7 @@ var winState = {
           fill: '#000000'
       });
     }
-    game.add.text(80,210, `You found: ${enemyMoney} Gold`, 
+    game.add.text(80,240, `You found: ${enemyMoney} Gold`, 
       {
         font: '25px Arial',
         fill: '#000000'

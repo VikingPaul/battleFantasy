@@ -1,12 +1,14 @@
 playerStats.class = [0,0,0]
+var classLeft = 0
+var classTotal = 0
 var classState = {
   create: function() {
     enterNum = 0
     if (!death) {
-      statsLeft += 1
-      statsTotal += 1
+      classLeft += 1
+      classTotal += 1
     }
-    statsLabel = game.add.text(300,80, `Choose Class: ${statsLeft}`, 
+    statsLabel = game.add.text(300,80, `Choose Class: ${classLeft}`, 
     {
       font: '50px Arial',
       fill: '#ffffff'
@@ -46,13 +48,13 @@ var classState = {
   },
   update: function() {
     var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-    if (cursors.up.isDown && statsLeft > 0) {
+    if (cursors.up.isDown && classLeft > 0) {
       classState.statsIncrease()
       classState.updateText()
       classState.pause()
       classState.pause()
       
-    } else if (cursors.down.isDown && statsTotal !== statsLeft) {
+    } else if (cursors.down.isDown && classTotal !== classLeft) {
       classState.statsDecrease()
       classState.updateText()
       classState.pause()
@@ -65,7 +67,7 @@ var classState = {
     }
   },
   updateText: function() {
-    statsLabel.setText(`Choose Class: ${statsLeft}`)
+    statsLabel.setText(`Choose Class: ${classLeft}`)
     strengthLabel.setText(`${playerStats.class[0]} :Fighter`)
     speedLabel.setText(`${playerStats.class[1]} :Rogue`)
     magicLabel.setText(`${playerStats.class[2]} :Mage`)
@@ -73,25 +75,25 @@ var classState = {
   statsIncrease: function() {
     if (enterNum == 0) {
       playerStats.class[0]++
-      statsLeft--
+      classLeft--
     } else if (enterNum == 1) {
       playerStats.class[1]++
-      statsLeft--
+      classLeft--
     } else if (enterNum == 2) {
       playerStats.class[2]++
-      statsLeft--
+      classLeft--
     }
   },
   statsDecrease: function() {
     if (enterNum == 0) {
       playerStats.class[0]--
-      statsLeft++
+      classLeft++
     } else if (enterNum == 1) {
       playerStats.class[1]--
-      statsLeft++
+      classLeft++
     } else if (enterNum == 2) {
       playerStats.class[2]--
-      statsLeft++
+      classLeft++
     }
   },
   pause: function() {

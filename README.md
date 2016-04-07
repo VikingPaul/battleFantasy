@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.15.8.2
+>> Version: 0.16.7.1
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -16,7 +16,6 @@
 
 > Please send all bugs to me so they can be fixed.
 
-* If you don't choose a class you can get a free point to stats.
 * Spacebar wins all battles. (Will fix right before v.1)
 
 >> Features

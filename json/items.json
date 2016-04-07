@@ -2,40 +2,49 @@
   "Potions": [{
     "Name": "Health Potion",
     "Owned": 0,
-    "Ability": [10,0]
+    "Ability": [10,0],
+    "Price": 25
   },{
     "Name": "Super Health Potion",
     "Owned": 0,
-    "Ability": [50,0]
+    "Ability": [50,0],
+    "Price": 100
   },{
     "Name": "Giga Health Potion",
     "Owned": 0,
-    "Ability": [100,0]
+    "Ability": [100,0],
+    "Price": 250
   },{
     "Name": "Max Health Potion",
     "Owned": 0,
-    "Ability": [1000,0]
+    "Ability": [1000,0],
+    "Price": 500
   },{
     "Name": "Mana Potion",
     "Owned": 0,
-    "Ability": [0,10]
+    "Ability": [0,10],
+    "Price": 25
   },{
     "Name": "Super Mana Potion",
     "Owned": 0,
-    "Ability": [0,50]
+    "Ability": [0,50],
+    "Price": 100
   },{
     "Name": "Giga Mana Potion",
     "Owned": 0,
-    "Ability": [0,100]
+    "Ability": [0,100],
+    "Price": 250
   },{
     "Name": "Max Mana Potion",
     "Owned": 0,
-    "Ability": [0,1000]
+    "Ability": [0,1000],
+    "Price": 500
   }],
   "Granades": [{
     "Name": "Bomb",
     "Owned": 0,
     "Damage": 50,
-    "Type": [100,0,0,0,0,0,0]
+    "Type": [100,0,0,0,0,0,0],
+    "Price": 50
   }]
 }
