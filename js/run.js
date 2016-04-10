@@ -1,8 +1,9 @@
+"use strict";
 var runState = {
   create: function() {
-    menu = game.add.group()
-    menu.create(0,0,'slateGrey')
-    menu.scale.setTo(10,10)
+    menu = game.add.group();
+    menu.create(0,0,'slateGrey');
+    menu.scale.setTo(10,10);
     var winLabel = game.add.text(80,80, 'Escaped!', 
       {
         font: '50px Arial',
@@ -14,6 +15,6 @@ var runState = {
     spaceKey.onDown.addOnce(this.start, this);
   },
   start: function() {
-    game.state.start('world')
+    game.state.start('world');
   }
-}
+};
