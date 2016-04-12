@@ -112,13 +112,13 @@ var statsState = {
     if (enterNum === 3 && beginning) {
       playerStats.maxHealth = playerStats.strength*3+playerStats.speed+10;
       playerStats.currentHealth = playerStats.maxHealth;
-      playerStats.maxMana = 5*playerStats.magic;
+      playerStats.maxMana = 5*playerStats.magic+playerStats.speed+playerStats.Lvl*5;
       playerStats.currentMana = playerStats.maxMana;
       beginning = false;
       game.state.start('equip');
     } else if (enterNum === 3 && !beginning) {
       playerStats.maxHealth = playerStats.strength*3+playerStats.speed+10;
-      playerStats.maxMana = 5*playerStats.magic;
+      playerStats.maxMana = 5*playerStats.magic+playerStats.speed+playerStats.Lvl*5;
       playerStats.currentMana = playerStats.maxMana;
       playerStats.currentHealth = playerStats.maxHealth;
       game.state.start('world');

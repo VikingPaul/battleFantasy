@@ -4,13 +4,18 @@ playerStats.deathCount = 0;
 playerStats.Lvl = 1;
 var equipment;
 var items;
+var classes
 var loadState = {
   preload: function() {
-    var equip = new XMLHttpRequest();
+    let classes = new XMLHttpRequest();
+    classes.addEventListener("load", loadState.XHRclasses);
+    classes.open("GET", "../json/classes.json");
+    classes.send();
+    let equip = new XMLHttpRequest();
     equip.addEventListener("load", loadState.XHREquip);
     equip.open("GET", "../json/equipment.json");
     equip.send();
-    var item = new XMLHttpRequest();
+    let item = new XMLHttpRequest();
     item.addEventListener("load", loadState.XHRItem);
     item.open("GET", "../json/items.json");
     item.send();
@@ -73,5 +78,8 @@ var loadState = {
   },
   XHRItem: function() {
     items = JSON.parse(this.responseText);
+  },
+  XHRclasses: function() {
+    classes = JSON.parse(this.responseText);
   }
 };

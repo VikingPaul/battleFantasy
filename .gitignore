@@ -2,4 +2,3 @@ node_modules
 .jshintrc
 gulpfile.js
 sounds/
-json/classes.json

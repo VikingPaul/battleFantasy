@@ -66,7 +66,10 @@ var useItemState = {
     selector.animations.add('default', [0, 1], 2, true);
     selector.animations.play('default');
     selector.scale.setTo(0.5,0.5);
-    game.add.text(450,550, `${playerStats.Money} Gold`)
+    game.add.text(450,515, `${playerStats.Money} Gold \n${playerStats.maxHealth} / ${playerStats.currentHealth} HP ~~ ${playerStats.maxMana} / ${playerStats.currentMana} MP`,
+      {
+        align: 'center'
+      });
     for (let i in items.Potions) {
       if (i < 4) {
         potionsLabel=game.add.text(30,i*50, `${items.Potions[i].Name}(${items.Potions[i].Ability[0]}HP): ${items.Potions[i].Owned}`, 

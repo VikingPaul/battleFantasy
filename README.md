@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.16.7.0
+>> Version: 0.17.6.3
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -16,10 +16,13 @@
 
 > Please send all bugs to me so they can be fixed.
 
-* None
+* Doesn't delete the ability number after use.
+* Doesn't show the amount you steal from enemies.
+* Doesn't show the ability number.
 
 >> Features
 
+* Abilities added
 * Money Added. Gain more when killing enemies.
 * Class Selection added. Doesn't effect game yet, but when abilities are added you'll gain new ones based on the class choice.
 * New animation for when you die.

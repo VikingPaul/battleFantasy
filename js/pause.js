@@ -1,4 +1,6 @@
 "use strict";
+playerStats.status = "Healthy"
+var words
 var pauseState = {
   create: function() {
     pauseState.pause();
@@ -7,6 +9,10 @@ var pauseState = {
     menu = game.add.group();
     menu.create(0,0,'slateGrey');
     menu.scale.setTo(10,7);
+    words = game.add.text(10,0, '',
+      {
+        font: '25px Arial'
+      });
     var itemLabel = game.add.text(700,0, 'Items', 
       {
         font: '50px Arial',
@@ -57,9 +63,9 @@ var pauseState = {
         lastPage = "pause";
         game.state.start('useItem');
       } else if (selector.world.y >= 60 && selector.world.y <= 80) {
-        console.log("Stats");
+        pauseState.showStats()
       } else if (selector.world.y >= 130 && selector.world.y <= 150) {
-        console.log("Abilities");
+        pauseState.showAbilities()
       } else if (selector.world.y >= 200 && selector.world.y <= 220) {
         console.log("Equip");
       }
@@ -70,5 +76,15 @@ var pauseState = {
   },
   pause: function() {
     game.paused = !game.paused;
+  },
+  showStats: function() {
+    words.setText(`HP: ${playerStats.maxHealth} / ${playerStats.currentHealth} \nMP: ${playerStats.maxMana} / ${playerStats.currentMana} \nStatus: ${playerStats.status}`);
+  },
+  showAbilities: function() {
+    let string = ""
+    for (let i in playerStats.abilities.name) {
+      string += playerStats.abilities.name[i] +": " + playerStats.abilities.cost[i] + " MP\n"
+    }
+    words.setText(string)
   }
 };

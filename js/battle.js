@@ -20,8 +20,30 @@ var playerHealthLabel;
 var enemySpeed;
 var enemyLabel;
 var enemyResist = [];
+var guard;
+var rally;
+var stealLabel;
+var hide;
+var numLabel;
+var taunt;
 var battleState = {
   create: function() {
+    guard = 0
+    rally = 0
+    taunt = 0
+    hide = 0
+    numLabel = game.add.text(350,game.world.height-190, " ", 
+      {
+        font: '20px Arial',
+        fill: '#000000'
+    })
+    numLabel.anchor.setTo()
+    stealLabel = game.add.text(game.world.width-200,game.world.height-190, '', 
+      {
+        font: '15px Arial',
+        fill: '#000000'
+    });
+    stealLabel.anchor.setTo()
     itemText = game.add.text(0,game.world.height-190, ``, 
           {
             font: '16px Arial',
@@ -59,7 +81,7 @@ var battleState = {
         font: '50px Arial',
         fill: '#000000'
     });
-    missLabel = game.add.text(game.world.width-130,150, '', 
+    missLabel = game.add.text(game.world.width-130,150, ' ', 
       {
         font: '50px Arial',
         fill: '#000000'
@@ -73,11 +95,10 @@ var battleState = {
     enemyLvl = playerStats.Lvl;
     enemyTotalHealth = Math.floor(Math.random()*randEnemy+10*enemyLvl);
     enemyRemainingHealth = parseInt(enemyTotalHealth);
-    let eNum = Math.floor(Math.random()*3*enemyLvl/5+enemyLvl);
+    let eNum = Math.floor(Math.random()*6+enemyLvl);
     enemyAttack = eNum;
-    enemyArmor = Math.ceil(Math.random()*5+enemyLvl);
-    enemySpeed = Math.ceil((3*enemyLvl/5+enemyLvl*3)-eNum);
-    eNum += enemySpeed;
+    enemyArmor = Math.floor(Math.random()*3+enemyLvl);
+    enemySpeed = Math.floor(Math.random()*6+enemyLvl)
     enemyExp = Math.floor(Math.random()*5+enemyLvl+Math.floor(Math.random()*5+enemyLvl));
     enemyMoney = Math.floor(Math.random()*5+enemyLvl);
     for (let i in items.Granades[0].Type) {
@@ -142,7 +163,7 @@ var battleState = {
         });
     enemyHealthLabel.anchor.setTo(0.5, 0.5);
 
-    playerHealthLabel = game.add.text(game.world.width-100,game.world.height-250, `${playerStats.maxHealth} / ${playerStats.currentHealth}`, 
+    playerHealthLabel = game.add.text(game.world.width-100,game.world.height-250, `${playerStats.maxHealth} / ${playerStats.currentHealth} HP\n${playerStats.maxMana} / ${playerStats.currentMana} MP`, 
           {
             font: '25px Arial',
             fill: '#000000'
@@ -181,8 +202,8 @@ var battleState = {
     var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     if (enterKey.isDown) {
       if (selector.world.x <= 560 && selector.world.y <= 455) {
-        if ((playerStats.strength+playerStats.Lvl+playerStats.weapon.stats[0])-enemyArmor > 0) {
-          enemyRemainingHealth = enemyRemainingHealth-((playerStats.strength+playerStats.weapon.stats[0])-enemyArmor);
+        if ((rally+playerStats.strength+playerStats.Lvl+playerStats.weapon.stats[0])-enemyArmor > 0) {
+          enemyRemainingHealth = enemyRemainingHealth-((playerStats.strength+playerStats.Lvl + playerStats.weapon.stats[0])-enemyArmor+rally);
         }
         battleState.updateText();
         if (enemyRemainingHealth <= 0) {
@@ -190,7 +211,8 @@ var battleState = {
         }
         battleState.enemyAttack();
       } else if (selector.world.x >= 730 && selector.world.y <= 455) {
-        console.log("Special");
+        battleState.resume();
+        battleState.useAbility()
       } else if (selector.world.x <= 560 && selector.world.y >= 545) {
         battleState.resume();
         battleState.useItem();
@@ -232,15 +254,29 @@ var battleState = {
   },
   enemyAttack: function() {
     game.paused = !game.paused;
-    if (Math.floor(Math.random()*(playerStats.speed+playerStats.armor.stats[2])) <= enemySpeed) {
-      if (-enemyAttack+playerStats.weapon.stats[2] < 0) {
-        playerStats.currentHealth = playerStats.currentHealth - enemyAttack+playerStats.weapon.stats[2];
-        missLabel.setText("");
-      } 
+    if (hide > 1) {
+      hide = Math.floor(hide/2)
+      missLabel.setText("HIDDEN");
     } else {
-      missLabel.setText("MISS");
+      if (Math.floor(Math.random()*playerStats.speed+playerStats.armor.stats[1]+taunt) <= enemySpeed) {
+        if (-enemyAttack+playerStats.armor.stats[0]+guard < 0) {
+          playerStats.currentHealth = playerStats.currentHealth - enemyAttack+playerStats.armor.stats[0];
+          missLabel.setText("");
+        } 
+      } else {
+        missLabel.setText("MISS");
+      }
+      playerHealthLabel.setText(`${playerStats.maxHealth} / ${playerStats.currentHealth} HP\n${playerStats.maxMana} / ${playerStats.currentMana} MP`);
     }
-    playerHealthLabel.setText(`${playerStats.maxHealth} / ${playerStats.currentHealth}`);
+    if (guard > 0) {
+      guard = Math.floor(guard/2)
+    }
+    if (rally > 0) {
+      rally = Math.floor(rally/2)
+    }
+    if (taunt > 0) {
+      taunt = Math.floor(taunt/2)
+    }
     setTimeout(battleState.resume(), 3000);
   },
   resume: function() {
@@ -330,5 +366,179 @@ var battleState = {
     battleState.updateText();
     battleState.enemyAttack();
     battleState.resume();
+  },
+  useAbility: function() {
+
+    enemyLabel.setText('');
+    enemyHealthLabel.setText('');
+    let num = ""
+    console.log(num)
+    numLabel.setText(`${num}`)
+    let string = ""
+    for (let i in playerStats.abilities.name) {
+      string += i + ": " + playerStats.abilities.name[i] + ": " + playerStats.abilities.cost[i] + "\n"
+    }
+    itemText = game.add.text(0,game.world.height-190, string, 
+          {
+            font: '16px Arial',
+            fill: '#000000'
+        });
+    document.addEventListener("keyup", numAbility);
+    function numAbility(e) {
+      if (e.code === "Digit1") {
+        num = num + "1"
+      } else if (e.code === "Digit2") {
+        num = num + "2"
+      } else if (e.code === "Digit3") {
+        num = num + "3"
+      } else if (e.code === "Digit4") {
+        num = num + "4"
+      } else if (e.code === "Digit5") {
+        num = num + "5"
+      } else if (e.code === "Digit6") {
+        num = num + "6"
+      } else if (e.code === "Digit7") {
+        num = num + "7"
+      } else if (e.code === "Digit8") {
+        num = num + "8"
+      } else if (e.code === "Digit9") {
+        num = num + "9"
+      } else if (e.code === "Digit0") {
+        num = num + "0"
+      } else if (e.code === "Enter" && num !== "" && parseInt(num) < playerStats.abilities.name.length && playerStats.currentMana >= playerStats.abilities.cost[parseInt(num)]) {
+        document.removeEventListener("keyup", numAbility)
+        battleState.abilities(num)
+      } else if (e.code === "Space") {
+        num = ""
+        document.removeEventListener("keyup", numAbility)
+        numLabel.setText(" ")
+        battleState.resume()
+        battleState.updateText()
+      }
+      if (parseInt(num) > 99) {
+        num = num.substring(1,num.length)
+      }
+      if (parseInt(num) > 99) {
+        num = num.substring(1,num.length)
+      }
+      console.log(num)
+      numLabel.setText(`${num}`)
+    }
+  },
+  abilities: function(num) {
+    playerStats.currentMana -=playerStats.abilities.cost[num]
+    let name = playerStats.abilities.name[num]
+    battleState.resume()
+    if (name === "Guard") {
+      guard += 5*playerStats.class[0]
+      battleState.updateText()
+      battleState.enemyAttack()
+    } else if (name === "Critical Strike") {
+      enemyRemainingHealth = enemyRemainingHealth-((playerStats.strength+playerStats.Lvl + playerStats.weapon.stats[0]))*1.5+playerStats.class[0];
+      if (enemyRemainingHealth <=0) {
+        battleState.start()
+      } else {
+        battleState.enemyAttack()
+        rally += 5*playerStats.class[0]
+        battleState.updateText()
+        battleState.enemyAttack()
+      }
+    } else if (name === "Taunt") {
+      taunt += 5*playerStats.class[0]
+      battleState.updateText()
+      battleState.enemyAttack()
+    } else if (name === "Call to Arms") {
+      guard += 5*playerStats.class[0]
+      taunt += 5*playerStats.class[0]
+      rally += 5*playerStats.class[0]
+      battleState.updateText()
+      battleState.enemyAttack()
+    } else if (name === "Steal") {
+      playerStats.Money += Math.ceil(enemyMoney/2)+playerStats.class[1]
+      console.log('steal')
+      stealLabel.setText(`You stole: Math.ceil(enemyMoney/2) Gold.`)
+      battleState.updateText()
+      battleState.enemyAttack()
+    } else if (name === "Escape") {
+      battleState.run()
+    } else if (name === "Mug") {
+      if (Math.ceil(Math.random()*99) > 50) {
+        playerStats.Money += Math.ceil(enemyMoney/2)+playerStats.class[1]
+        stealLabel.setText(`You stole: Math.ceil(enemyMoney/2) Gold.`)
+      } else {
+        if (playerStats.class < 6) {
+          items.Potions[0].Owned++
+          stealLabel.setText(`You stole: Health Potion`)
+        } else if(playerStats.class[1] < 10) {
+          items.Potions[1].Owned++
+          stealLabel.setText(`You stole: Super Health Potion`)
+        } else if (playerStats.class < 12) {
+          items.Potions[2].Owned++
+          stealLabel.setText(`You stole: Giga Health Potion`)
+        } else if (playerStats.class < 15) {
+          items.Potions[3].Owned++
+          stealLabel.setText(`You stole: max Health Potion`)
+        }
+      }
+      if ((rally+playerStats.strength+playerStats.Lvl+playerStats.weapon.stats[0])-enemyArmor > 0) {
+        enemyRemainingHealth = enemyRemainingHealth-((playerStats.strength+playerStats.Lvl + playerStats.weapon.stats[0])-enemyArmor+rally);
+      }
+      battleState.updateText();
+      if (enemyRemainingHealth <=0) {
+        battleState.start()
+      } else {
+        battleState.enemyAttack()
+      }tleState.updateText();
+      if (enemyRemainingHealth <=0) {
+        battleState.start()
+      } else {
+        battleState.enemyAttack()
+      }
+    } else if (name === "Hide") {
+      hide += playerStats.class[1]
+      battleState.updateText()
+      battleState.enemyAttack()
+    } else if (name === "Confuse") {
+      enemyRemainingHealth -= (enemyAttack+playerStats.class[1])
+      battleState.updateText()
+    } else if (name === "Heal") {
+      playerStats.currentHealth += 10*playerStats.class[2]
+      battleState.updateText()
+      battleState.enemyAttack()
+    } else if (name === "Fire") {
+      enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[0]
+      battleState.updateText();
+      if (enemyRemainingHealth <=0) {
+        battleState.start()
+      } else {
+        battleState.enemyAttack()
+      }
+    } else if (name === "Thunder") {
+      enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[2]
+      battleState.updateText();
+      if (enemyRemainingHealth <=0) {
+        battleState.start()
+      } else {
+        battleState.enemyAttack()
+      }
+    } else if (name === "Blizzard") {
+      enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[1]
+      battleState.updateText();
+      if (enemyRemainingHealth <=0) {
+        battleState.start()
+      } else {
+        battleState.enemyAttack()
+      }
+    } else if (name === "Summon") {
+      enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[0]
+      enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[1]
+      enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[2]
+      battleState.updateText();
+      if (enemyRemainingHealth <=0) {
+        battleState.start()
+      } else {
+        battleState.enemyAttack()
+      }
+    }
   }
 };

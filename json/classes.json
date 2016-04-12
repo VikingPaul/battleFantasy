@@ -1,0 +1,25 @@
+{
+  "Fighter": {
+    "Names": [
+      "Guard", "Critical Strike", "Rally", "Taunt", "Call to Arms"
+    ],
+    "Cost": [5,7,10,15,20],
+    "Owned": [false, false, false, false, false]
+  },
+
+  "Rogue": {
+    "Names": [
+      "Steal", "Escape", "Mug", "Hide", "Confuse"
+    ],
+    "Cost": [5,7,10,15,20],
+    "Owned": [false, false, false, false, false]
+  },
+
+  "Mage": {
+    "Names": [
+      "Heal", "Fire", "Thunder", "Blizzard", "Summon"
+    ],
+    "Cost": [5,7,10,15,20],
+    "Owned": [false, false, false, false, false]
+  }
+}
