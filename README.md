@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.17.6.3
+>> Version: 0.17.6.0
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -16,9 +16,6 @@
 
 > Please send all bugs to me so they can be fixed.
 
-* Doesn't delete the ability number after use.
-* Doesn't show the amount you steal from enemies.
-* Doesn't show the ability number.
 
 >> Features
 

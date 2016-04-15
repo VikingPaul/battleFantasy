@@ -32,18 +32,6 @@ var battleState = {
     rally = 0
     taunt = 0
     hide = 0
-    numLabel = game.add.text(350,game.world.height-190, " ", 
-      {
-        font: '20px Arial',
-        fill: '#000000'
-    })
-    numLabel.anchor.setTo()
-    stealLabel = game.add.text(game.world.width-200,game.world.height-190, '', 
-      {
-        font: '15px Arial',
-        fill: '#000000'
-    });
-    stealLabel.anchor.setTo()
     itemText = game.add.text(0,game.world.height-190, ``, 
           {
             font: '16px Arial',
@@ -372,8 +360,12 @@ var battleState = {
     enemyLabel.setText('');
     enemyHealthLabel.setText('');
     let num = ""
-    console.log(num)
-    numLabel.setText(`${num}`)
+    numLabel = game.add.text(350,game.world.height-190, " ", 
+      {
+        font: '20px Arial',
+        fill: '#000000'
+    })
+    numLabel.anchor.setTo()
     let string = ""
     for (let i in playerStats.abilities.name) {
       string += i + ": " + playerStats.abilities.name[i] + ": " + playerStats.abilities.cost[i] + "\n"
@@ -385,6 +377,7 @@ var battleState = {
         });
     document.addEventListener("keyup", numAbility);
     function numAbility(e) {
+      numLabel.setText("")
       if (e.code === "Digit1") {
         num = num + "1"
       } else if (e.code === "Digit2") {
@@ -409,9 +402,7 @@ var battleState = {
         document.removeEventListener("keyup", numAbility)
         battleState.abilities(num)
       } else if (e.code === "Space") {
-        num = ""
         document.removeEventListener("keyup", numAbility)
-        numLabel.setText(" ")
         battleState.resume()
         battleState.updateText()
       }
@@ -421,8 +412,9 @@ var battleState = {
       if (parseInt(num) > 99) {
         num = num.substring(1,num.length)
       }
-      console.log(num)
-      numLabel.setText(`${num}`)
+      if (e.code !== "Enter" && e.code !== "Space") {
+        numLabel.setText(`${num}`)
+      }
     }
   },
   abilities: function(num) {
@@ -454,9 +446,15 @@ var battleState = {
       battleState.updateText()
       battleState.enemyAttack()
     } else if (name === "Steal") {
+      stealLabel = game.add.text(game.world.width-200,game.world.height-190, '', 
+      {
+        font: '15px Arial',
+        fill: '#000000'
+      });
+      stealLabel.anchor.setTo()
       playerStats.Money += Math.ceil(enemyMoney/2)+playerStats.class[1]
-      console.log('steal')
-      stealLabel.setText(`You stole: Math.ceil(enemyMoney/2) Gold.`)
+      stealLabel.setText(`You stole: ${Math.ceil(enemyMoney/2)} Gold.`)
+      setTimeout(battleState.deleteSteal, 10000)
       battleState.updateText()
       battleState.enemyAttack()
     } else if (name === "Escape") {
@@ -464,7 +462,7 @@ var battleState = {
     } else if (name === "Mug") {
       if (Math.ceil(Math.random()*99) > 50) {
         playerStats.Money += Math.ceil(enemyMoney/2)+playerStats.class[1]
-        stealLabel.setText(`You stole: Math.ceil(enemyMoney/2) Gold.`)
+        stealLabel.setText(`You stole: ${Math.ceil(enemyMoney/2)} Gold.`)
       } else {
         if (playerStats.class < 6) {
           items.Potions[0].Owned++
@@ -477,7 +475,7 @@ var battleState = {
           stealLabel.setText(`You stole: Giga Health Potion`)
         } else if (playerStats.class < 15) {
           items.Potions[3].Owned++
-          stealLabel.setText(`You stole: max Health Potion`)
+          stealLabel.setText(`You stole: Max Health Potion`)
         }
       }
       if ((rally+playerStats.strength+playerStats.Lvl+playerStats.weapon.stats[0])-enemyArmor > 0) {
@@ -540,5 +538,8 @@ var battleState = {
         battleState.enemyAttack()
       }
     }
+  },
+  deleteSteal: function() {
+    stealLabel.setText("")
   }
 };
