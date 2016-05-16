@@ -97,7 +97,7 @@ var winState = {
     }
   },
   start: function() {
-    game.state.start('world');
+    game.state.start(lastPage);
   },
   levelUp: function() {
     if (playerStats.Lvl%5 === 0){

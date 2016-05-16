@@ -1,32 +1,5 @@
 "use strict";
-var selector;
-var enemyTotalHealth;
-var enemyRemainingHealth;
-var enemyHealthLabel;
-var enemyAttack;
-var turn;
-var enemyExp;
-var ememyDropRate;
-var missLabel;
-var enemyArmor;
-var randEnemy;
-var enemyLabel;
-var itemText;
-var enemyLvl;
-var damage;
-var enemyMoney;
-var menu;
-var playerHealthLabel;
-var enemySpeed;
-var enemyLabel;
-var enemyResist = [];
-var guard;
-var rally;
-var stealLabel;
-var hide;
-var numLabel;
-var taunt;
-var battleState = {
+var bossState = {
   create: function() {
     guard = 0;
     rally = 0;
@@ -80,63 +53,23 @@ var battleState = {
     selector.animations.add('default', [0, 1], 2, true);
     selector.animations.play('default');
     randEnemy = Math.floor(Math.random()*6+1);
-    enemyLvl = playerStats.Lvl;
+    enemyLvl = playerStats.Lvl + 5;
     enemyTotalHealth = Math.floor(Math.random()*randEnemy+10*enemyLvl);
     enemyRemainingHealth = parseInt(enemyTotalHealth);
     let eNum = Math.floor(Math.random()*6+enemyLvl);
     enemyAttack = eNum;
     enemyArmor = Math.floor(Math.random()*3+enemyLvl);
     enemySpeed = Math.floor(Math.random()*6+enemyLvl);
-    enemyExp = Math.floor(Math.random()*5+enemyLvl+Math.floor(Math.random()*5+enemyLvl));
-    enemyMoney = Math.floor(Math.random()*5+enemyLvl);
+    enemyExp = Math.floor(Math.random()*5+enemyLvl+Math.floor(Math.random()*5+enemyLvl+100));
+    enemyMoney = Math.floor(Math.random()*5+enemyLvl+20);
     for (let i in items.Granades[0].Type) {
       enemyResist[i] = 0;
     }
     let enemy;
-    switch (randEnemy) {
+    switch (whichBoss) {
       case 1:
-        enemy = game.add.sprite(0,150, 'basicRedEnemy');
-        enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} RED!`, 
-          {
-            font: '50px Arial',
-            fill: '#000000'
-        });
-        break;
-      case 2:
-        enemy = game.add.sprite(0,150, 'basicGreenEnemy');
-        enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} GREEN!`, 
-          {
-            font: '50px Arial',
-            fill: '#000000'
-        });
-        break;
-      case 3:
-        enemy = game.add.sprite(0,150, 'basicLightBlueEnemy');
-        enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} LIGHT BLUE!`, 
-          {
-            font: '50px Arial',
-            fill: '#000000'
-        });
-        break;
-      case 4:
-        enemy = game.add.sprite(0,150, 'basicPurpleEnemy');
-        enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} PURPLE!`, 
-          {
-            font: '50px Arial',
-            fill: '#000000'
-        });
-        break;
-      case 5:
-        enemy = game.add.sprite(0,150, 'basicBlueEnemy');
-        enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} BLUE!`, 
-          {
-            font: '50px Arial',
-            fill: '#000000'
-        });
-        break;
-      case 6:
-        enemy = game.add.sprite(0,150, 'basicYellowEnemy');
-        enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} YELLOW!`, 
+        enemy = game.add.sprite(0,150, 'level1Boss');
+        enemyLabel = game.add.text(0,game.world.height-200, `Lvl: ${enemyLvl} BOSS!`, 
           {
             font: '50px Arial',
             fill: '#000000'
@@ -163,13 +96,13 @@ var battleState = {
   update: function() {
     if (enemySpeed > playerStats.speed && turn === 1) {
       turn++;
-      battleState.enemyAttack();
+      bossState.enemyAttack();
     }
     if (enemyRemainingHealth <= 0) {
-      battleState.start();
+      bossState.start();
     }
     if (playerStats.currentHealth <= 0) {
-      battleState.death();
+      bossState.death();
     }
     if (selector.world.x >= 730 || selector.world.x <= 560) {
       selector.body.velocity.x = 0;
@@ -193,22 +126,22 @@ var battleState = {
         if ((rally+playerStats.strength+playerStats.Lvl+playerStats.weapon.stats[0])-enemyArmor > 0) {
           enemyRemainingHealth = enemyRemainingHealth-((playerStats.strength+playerStats.Lvl + playerStats.weapon.stats[0])-enemyArmor+rally);
         }
-        battleState.updateText();
+        bossState.updateText();
         if (enemyRemainingHealth <= 0) {
-          battleState.start();
+          bossState.start();
         }
-        battleState.enemyAttack();
+        bossState.enemyAttack();
       } else if (selector.world.x >= 730 && selector.world.y <= 455) {
-        battleState.resume();
-        battleState.useAbility();
+        bossState.resume();
+        bossState.useAbility();
       } else if (selector.world.x <= 560 && selector.world.y >= 545) {
-        battleState.resume();
-        battleState.useItem();
+        bossState.resume();
+        bossState.useItem();
       } else if (selector.world.x >= 730 && selector.world.y >= 545) {
         if (enemySpeed < Math.floor(Math.random()*playerStats.speed+playerStats.armor.stats[2])){
-          battleState.run();
+          bossState.run();
         } else {
-          battleState.enemyAttack();
+          bossState.enemyAttack();
         }
       }
     }
@@ -238,6 +171,7 @@ var battleState = {
     enemyHealthLabel.setText(`${enemyTotalHealth} / ${enemyRemainingHealth}`);
   },
   start: function() {
+    boss = false
     game.state.start('win');
   },
   enemyAttack: function() {
@@ -265,7 +199,7 @@ var battleState = {
     if (taunt > 0) {
       taunt = Math.floor(taunt/2);
     }
-    setTimeout(battleState.resume(), 3000);
+    setTimeout(bossState.resume(), 3000);
   },
   resume: function() {
     game.paused = !game.paused;
@@ -289,55 +223,55 @@ var battleState = {
       if (e.code === "Digit1" && items.Potions[0].Owned >0) {
         num = 0;
         document.removeEventListener("keyup", numEvent);
-        battleState.increaseHealthMana();
+        bossState.increaseHealthMana();
       } else if (e.code === "Digit2" && items.Potions[1].Owned >0) {
         num = 1;
         document.removeEventListener("keyup", numEvent);
-        battleState.increaseHealthMana();
+        bossState.increaseHealthMana();
       } else if (e.code === "Digit3" && items.Potions[2].Owned >0) {
         num = 2;
         document.removeEventListener("keyup", numEvent);
-        battleState.increaseHealthMana();
+        bossState.increaseHealthMana();
       } else if (e.code === "Digit4" && items.Potions[3].Owned >0) {
         num = 3;
         document.removeEventListener("keyup", numEvent);
-        battleState.increaseHealthMana();
+        bossState.increaseHealthMana();
       } else if (e.code === "Digit5" && items.Potions[4].Owned >0) {
         num = 4;
         document.removeEventListener("keyup", numEvent);
-        battleState.increaseHealthMana();
+        bossState.increaseHealthMana();
       } else if (e.code === "Digit6" && items.Potions[5].Owned >0) {
         num = 5;
         document.removeEventListener("keyup", numEvent);
-        battleState.increaseHealthMana();
+        bossState.increaseHealthMana();
       } else if (e.code === "Digit7" && items.Potions[6].Owned >0) {
         num = 6;
         document.removeEventListener("keyup", numEvent);
-        battleState.increaseHealthMana();
+        bossState.increaseHealthMana();
       } else if (e.code === "Digit8" && items.Granades[0].Owned >0) {
         num = 0;
         document.removeEventListener("keyup", numEvent);
-        battleState.granade();
+        bossState.granade();
       } else if (e.code === "Space") {
         document.removeEventListener("keyup", numEvent);
-        battleState.updateText();
-        battleState.resume();
+        bossState.updateText();
+        bossState.resume();
       }
     }
   },
   granade: function() {
-    battleState.resume();
+    bossState.resume();
     damage = 0;
     for (let i in items.Granades[num].Type) {
       damage += items.Granades[num].Damage*(items.Granades[num].Type[i]/100)- enemyResist[i];
     }
     items.Granades[num].Owned--;
     enemyRemainingHealth -= damage;
-    battleState.updateText();
+    bossState.updateText();
     if (enemyRemainingHealth < 1) {
       game.state.start('win');
     } else {
-      battleState.enemyAttack();
+      bossState.enemyAttack();
     }
   },
   increaseHealthMana: function() {
@@ -350,9 +284,9 @@ var battleState = {
       playerStats.currentMana = playerStats.maxMana;
     }
     items.Potions[num].Owned--;
-    battleState.updateText();
-    battleState.enemyAttack();
-    battleState.resume();
+    bossState.updateText();
+    bossState.enemyAttack();
+    bossState.resume();
   },
   useAbility: function() {
 
@@ -399,11 +333,11 @@ var battleState = {
         num = num + "0";
       } else if (e.code === "Enter" && num !== "" && parseInt(num) < playerStats.abilities.name.length && playerStats.currentMana >= playerStats.abilities.cost[parseInt(num)]) {
         document.removeEventListener("keyup", numAbility);
-        battleState.abilities(num);
+        bossState.abilities(num);
       } else if (e.code === "Space") {
         document.removeEventListener("keyup", numAbility);
-        battleState.resume();
-        battleState.updateText();
+        bossState.resume();
+        bossState.updateText();
       }
       if (parseInt(num) > 99) {
         num = num.substring(1,num.length);
@@ -419,31 +353,31 @@ var battleState = {
   abilities: function(num) {
     playerStats.currentMana -=playerStats.abilities.cost[num];
     let name = playerStats.abilities.name[num];
-    battleState.resume();
+    bossState.resume();
     if (name === "Guard") {
       guard += 5*playerStats.class[0];
-      battleState.updateText();
-      battleState.enemyAttack();
+      bossState.updateText();
+      bossState.enemyAttack();
     } else if (name === "Critical Strike") {
       enemyRemainingHealth = enemyRemainingHealth-((playerStats.strength+playerStats.Lvl + playerStats.weapon.stats[0]))*1.5+playerStats.class[0];
       if (enemyRemainingHealth <=0) {
-        battleState.start();
+        bossState.start();
       } else {
-        battleState.enemyAttack();
+        bossState.enemyAttack();
         rally += 5*playerStats.class[0];
-        battleState.updateText();
-        battleState.enemyAttack();
+        bossState.updateText();
+        bossState.enemyAttack();
       }
     } else if (name === "Taunt") {
       taunt += 5*playerStats.class[0];
-      battleState.updateText();
-      battleState.enemyAttack();
+      bossState.updateText();
+      bossState.enemyAttack();
     } else if (name === "Call to Arms") {
       guard += 5*playerStats.class[0];
       taunt += 5*playerStats.class[0];
       rally += 5*playerStats.class[0];
-      battleState.updateText();
-      battleState.enemyAttack();
+      bossState.updateText();
+      bossState.enemyAttack();
     } else if (name === "Steal") {
       stealLabel = game.add.text(game.world.width-200,game.world.height-190, '', 
       {
@@ -453,11 +387,11 @@ var battleState = {
       stealLabel.anchor.setTo();
       playerStats.Money += Math.ceil(enemyMoney/2)+playerStats.class[1];
       stealLabel.setText(`You stole: ${Math.ceil(enemyMoney/2)} Gold.`);
-      setTimeout(battleState.deleteSteal, 10000);
-      battleState.updateText();
-      battleState.enemyAttack();
+      setTimeout(bossState.deleteSteal, 10000);
+      bossState.updateText();
+      bossState.enemyAttack();
     } else if (name === "Escape") {
-      battleState.run();
+      bossState.run();
     } else if (name === "Mug") {
       if (Math.ceil(Math.random()*99) > 50) {
         playerStats.Money += Math.ceil(enemyMoney/2)+playerStats.class[1];
@@ -480,68 +414,69 @@ var battleState = {
       if ((rally+playerStats.strength+playerStats.Lvl+playerStats.weapon.stats[0])-enemyArmor > 0) {
         enemyRemainingHealth = enemyRemainingHealth-((playerStats.strength+playerStats.Lvl + playerStats.weapon.stats[0])-enemyArmor+rally);
       }
-      battleState.updateText();
+      bossState.updateText();
       if (enemyRemainingHealth <=0) {
-        battleState.start();
+        bossState.start();
       } else {
-        battleState.enemyAttack();
+        bossState.enemyAttack();
       }tleState.updateText();
       if (enemyRemainingHealth <=0) {
-        battleState.start();
+        bossState.start();
       } else {
-        battleState.enemyAttack();
+        bossState.enemyAttack();
       }
     } else if (name === "Hide") {
       hide += playerStats.class[1];
-      battleState.updateText();
-      battleState.enemyAttack();
+      bossState.updateText();
+      bossState.enemyAttack();
     } else if (name === "Confuse") {
       enemyRemainingHealth -= (enemyAttack+playerStats.class[1]);
-      battleState.updateText();
+      bossState.updateText();
     } else if (name === "Heal") {
       playerStats.currentHealth += 10*playerStats.class[2];
       if (playerStats.currentHealth > playerStats.maxHealth) {
         playerStats.currentHealth = playerStats.maxHealth;
       }
-      battleState.updateText();
-      battleState.enemyAttack();
+      bossState.updateText();
+      bossState.enemyAttack();
     } else if (name === "Fire") {
       enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[0];
-      battleState.updateText();
+      bossState.updateText();
       if (enemyRemainingHealth <=0) {
-        battleState.start();
+        bossState.start();
       } else {
-        battleState.enemyAttack();
+        bossState.enemyAttack();
       }
     } else if (name === "Thunder") {
       enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[2];
-      battleState.updateText();
+      bossState.updateText();
       if (enemyRemainingHealth <=0) {
-        battleState.start();
+        bossState.start();
       } else {
-        battleState.enemyAttack();
+        bossState.enemyAttack();
       }
     } else if (name === "Blizzard") {
       enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[1];
-      battleState.updateText();
+      bossState.updateText();
       if (enemyRemainingHealth <=0) {
-        battleState.start();
+        bossState.start();
       } else {
-        battleState.enemyAttack();
+        bossState.enemyAttack();
       }
     } else if (name === "Summon") {
       enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[0];
       enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[1];
       enemyRemainingHealth -= 5*(playerStats.class[2]+Math.ceil(playerStats.magic/5))-enemyResist[2];
-      battleState.updateText();
+      bossState.updateText();
       if (enemyRemainingHealth <=0) {
-        battleState.start();
+        bossState.start();
       } else {
-        battleState.enemyAttack();
+        bossState.enemyAttack();
       }
     }
   },
   deleteSteal: function() {
     stealLabel.setText("");
   }
+
 };

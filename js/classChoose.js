@@ -6,7 +6,7 @@ var cursors;
 playerStats.abilities = {
   name: [],
   cost: []
-}
+};
 var classState = {
   create: function() {
     enterNum = 0;
@@ -110,44 +110,44 @@ var classState = {
     if (enterNum === 3) {
       if (classTotal > 0) {
         if (playerStats.class[0] === 1) {
-          classes.Fighter.Owned[0] = true
-          classes.Fighter.Owned[1] = true
+          classes.Fighter.Owned[0] = true;
+          classes.Fighter.Owned[1] = true;
         } else if (playerStats.class[0] === 5) {
-          classes.Fighter.Owned[2] = true
-          classes.Fighter.Owned[3] = true
+          classes.Fighter.Owned[2] = true;
+          classes.Fighter.Owned[3] = true;
         } else if (playerStats.class[0] === 10) {
-          classes.Fighter.Owned[4] = true
+          classes.Fighter.Owned[4] = true;
         } else if (playerStats.class[1] === 1) {
-          classes.Rogue.Owned[0] = true
-          classes.Rogue.Owned[1] = true
+          classes.Rogue.Owned[0] = true;
+          classes.Rogue.Owned[1] = true;
         } else if (playerStats.class[1] === 5) {
-          classes.Rogue.Owned[2] = true
-          classes.Rogue.Owned[3] = true
+          classes.Rogue.Owned[2] = true;
+          classes.Rogue.Owned[3] = true;
         } else if (playerStats.class[1] === 10) {
-          classes.Rogue.Owned[4] = true
+          classes.Rogue.Owned[4] = true;
         } else if (playerStats.class[2] === 1) {
-          classes.Mage.Owned[0] = true
-          classes.Mage.Owned[1] = true
+          classes.Mage.Owned[0] = true;
+          classes.Mage.Owned[1] = true;
         } else if (playerStats.class[2] === 5) {
-          classes.Mage.Owned[2] = true
-          classes.Mage.Owned[3] = true
+          classes.Mage.Owned[2] = true;
+          classes.Mage.Owned[3] = true;
         } else if (playerStats.class[2] === 10) {
-          classes.Mage.Owned[4] = true
+          classes.Mage.Owned[4] = true;
         }
-        playerStats.abilities.name = []
-        playerStats.abilities.cost = []
+        playerStats.abilities.name = [];
+        playerStats.abilities.cost = [];
         for (let i in classes.Fighter.Owned) {
           if (classes.Fighter.Owned[i]) {
-            playerStats.abilities.name.push(classes.Fighter.Names[i])
-            playerStats.abilities.cost.push(classes.Fighter.Cost[i])
+            playerStats.abilities.name.push(classes.Fighter.Names[i]);
+            playerStats.abilities.cost.push(classes.Fighter.Cost[i]);
           }
           if (classes.Rogue.Owned[i]) {
-            playerStats.abilities.name.push(classes.Rogue.Names[i])
-            playerStats.abilities.cost.push(classes.Rogue.Cost[i])
+            playerStats.abilities.name.push(classes.Rogue.Names[i]);
+            playerStats.abilities.cost.push(classes.Rogue.Cost[i]);
           }
           if (classes.Mage.Owned[i]) {
-            playerStats.abilities.name.push(classes.Mage.Names[i])
-            playerStats.abilities.cost.push(classes.Mage.Cost[i])
+            playerStats.abilities.name.push(classes.Mage.Names[i]);
+            playerStats.abilities.cost.push(classes.Mage.Cost[i]);
           }
         }
       }

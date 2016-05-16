@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.17.6.0
+>> Version: 0.19.4.0
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -19,7 +19,9 @@
 
 >> Features
 
-* Abilities added
+* Boss Added.
+* Dungeon Added.
+* Abilities Added.
 * Money Added. Gain more when killing enemies.
 * Class Selection added. Doesn't effect game yet, but when abilities are added you'll gain new ones based on the class choice.
 * New animation for when you die.

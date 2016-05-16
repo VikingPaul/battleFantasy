@@ -10,6 +10,7 @@ var beginning = true;
 var death = false;
 var statsState = {
   create: function() {
+    counter = 0;
     enterNum = 0;
     if (!death) {
       statsLeft += 5;

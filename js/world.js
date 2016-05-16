@@ -6,8 +6,11 @@ var hole;
 var player;
 var ledge;
 var ground;
+var counter;
 var worldState = {
   create: function() {
+    lastPage = 'world';
+    battlebackground = 'battleOutdoorGrass'
     game.world.resize(4000, 4000);
     game.camera.x = gameCameraX;
     game.camera.y = gameCameraY;
@@ -66,6 +69,25 @@ var worldState = {
           ledge = hole.create(i*96+16,j*96, "stoneWall");
           ledge.body.immovable = true;
         }
+        if (i === 34 && j >= 31 && j <33) {
+          ledge = hole.create(i*96,j*96, "stoneWall");
+          ledge.body.immovable = true;
+        } else if (i === 36 && j >= 31 && j <33) {
+          ledge = hole.create(i*96,j*96, "stoneWall");
+          ledge.body.immovable = true;
+        } else if (i === 35 && j === 32) {
+          ledge = hole.create(i*96,j*96, "stoneStairs");
+          ledge.body.immovable = true;
+        } else if (i >= 34 && i <= 36 && j === 31) {
+          ledge = hole.create(i*96,j*96, "stoneWall");
+          ledge.body.immovable = true;
+        } else if (i === 34 && j === 33) {
+          ledge = hole.create(i*96-16,j*96, "stoneWall");
+          ledge.body.immovable = true;
+        } else if (i === 36 && j === 33) {
+          ledge = hole.create(i*96+16,j*96, "stoneWall");
+          ledge.body.immovable = true;
+        }
       }
     }
     player = game.add.sprite(playerWidth, playerHeight, 'characterMovement');
@@ -83,6 +105,15 @@ var worldState = {
     var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     spaceKey.onDown.addOnce(this.pause, this);
     var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    if (enterKey.isDown && player.world.y === 3168 && player.world.x >= 3344 && player.world.x <= 3376) {
+      level = 1;
+      playerHeight = 2496;
+      playerWidth = 1774;
+      gameCameraX = 1400;
+      gameCameraY = 2048;
+      boss = true
+      worldState.dungoen1();
+    }
 
     if (enterKey.isDown && player.world.y === 288 && player.world.x >= 464 && player.world.x <= 496) {
       worldState.shop();
@@ -94,7 +125,6 @@ var worldState = {
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
-
     if (cursors.left.isDown) {
       //  Move to the left
       player.body.velocity.x = -350;
@@ -133,11 +163,18 @@ var worldState = {
     game.state.start('pause');
   },
   shop: function() {
-    lastPage = "world";
     game.state.start('shop');
+  },
+  dungoen1: function() {
+    game.state.start('dungoen');
   }
 };
 function battleTest() {
+  counter++;
+  if (counter >= 150 && playerStats.currentMana < playerStats.maxMana) {
+    counter = 0;
+    playerStats.currentMana++;
+  }
   gameCameraX = game.camera.x;
   gameCameraY = game.camera.y;
   playerHeight = player.world.y;

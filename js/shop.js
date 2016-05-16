@@ -68,12 +68,12 @@ var shopState = {
     game.paused = !game.paused;
   },
   buyItem: function(num) {
-    if (num < items.Potions.length){
+    if (num < items.Potions.length-1){
       items.Potions[num].Owned += amount;
       playerStats.Money -= items.Potions[num].Price*amount;
     } else if (num < items.Potions.length+items.Granades.length){
-      items.Granades[num].Owned += amount;
-      playerStats.Money -= items.Granades[num].Price*amount;
+      items.Granades[num-7].Owned += amount;
+      playerStats.Money -= items.Granades[num-7].Price*amount;
     }
     amount = 0;
     shopState.updateText();

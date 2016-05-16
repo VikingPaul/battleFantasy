@@ -2,3 +2,4 @@ node_modules
 .jshintrc
 gulpfile.js
 sounds/
+boss.piskel

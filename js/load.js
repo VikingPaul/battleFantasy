@@ -4,9 +4,15 @@ playerStats.deathCount = 0;
 playerStats.Lvl = 1;
 var equipment;
 var items;
-var classes
+var classes;
 var loadState = {
   preload: function() {
+    let dun = new XMLHttpRequest();
+    dun.addEventListener("load", function() {
+    dungeon = JSON.parse(this.responseText);
+  });
+    dun.open("GET", "../json/firstDungeon.json");
+    dun.send();
     let classes = new XMLHttpRequest();
     classes.addEventListener("load", loadState.XHRclasses);
     classes.open("GET", "../json/classes.json");
@@ -38,6 +44,9 @@ var loadState = {
     game.load.image('stoneStairs', '../pixels/stone/stoneStairs.png');
     game.load.image('stoneThrone', '../pixels/stone/stoneThrone.png');
     game.load.image('stoneShop', '../pixels/stone/stoneShop.png');
+    game.load.image('stoneUp', '../pixels/stone/stoneUp.png');
+    game.load.image('stoneDown', '../pixels/stone/stoneDown.png');
+    game.load.image('battleIndoorStone', '../pixels/background/battleIndoorStone.png');
 
 ////////////////////////////////////////////////////////
 ////////////////////////  Grass  /////////////////////////
@@ -63,6 +72,10 @@ var loadState = {
     game.load.image('basicPurpleEnemy', '../pixels/enemies/basic/basicPurpleEnemy.png');
     game.load.image('basicBlueEnemy', '../pixels/enemies/basic/basicBlueEnemy.png');
     game.load.image('basicYellowEnemy', '../pixels/enemies/basic/basicYellowEnemy.png');
+//////////////////////////////////////////////////////////
+//////////////////////  Boss  /////////////////////////
+//////////////////////////////////////////////////////////
+    game.load.image('level1Boss', '../pixels/enemies/bosses/boss.png');
 //////////////////////////////////////////////////////////
 ///////////////////  background  /////////////////////////
 //////////////////////////////////////////////////////////

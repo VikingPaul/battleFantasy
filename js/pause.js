@@ -1,6 +1,6 @@
 "use strict";
-playerStats.status = "Healthy"
-var words
+playerStats.status = "Healthy";
+var words;
 var pauseState = {
   create: function() {
     pauseState.pause();
@@ -63,9 +63,9 @@ var pauseState = {
         lastPage = "pause";
         game.state.start('useItem');
       } else if (selector.world.y >= 60 && selector.world.y <= 80) {
-        pauseState.showStats()
+        pauseState.showStats();
       } else if (selector.world.y >= 130 && selector.world.y <= 150) {
-        pauseState.showAbilities()
+        pauseState.showAbilities();
       } else if (selector.world.y >= 200 && selector.world.y <= 220) {
         console.log("Equip");
       }
@@ -78,13 +78,22 @@ var pauseState = {
     game.paused = !game.paused;
   },
   showStats: function() {
+    if (playerStats.currentHealth > playerStats.maxHealth*0.75) {
+      playerStats.status = "Healthy";
+    } else if (playerStats.currentHealth > playerStats.maxHealth*0.5) {
+      playerStats.status = "Hurting";
+    } else if (playerStats.currentHealth > playerStats.maxHealth*0.25) {
+      playerStats.status = "Dying";
+    } else {
+      playerStats.status = "On Death's Door";
+    }
     words.setText(`HP: ${playerStats.maxHealth} / ${playerStats.currentHealth} \nMP: ${playerStats.maxMana} / ${playerStats.currentMana} \nStatus: ${playerStats.status}`);
   },
   showAbilities: function() {
-    let string = ""
+    let string = "";
     for (let i in playerStats.abilities.name) {
-      string += playerStats.abilities.name[i] +": " + playerStats.abilities.cost[i] + " MP\n"
+      string += playerStats.abilities.name[i] +": " + playerStats.abilities.cost[i] + " MP\n";
     }
-    words.setText(string)
+    words.setText(string);
   }
 };
