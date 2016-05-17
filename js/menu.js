@@ -20,7 +20,7 @@ var menuState = {
       font: '50px Arial',
       fill: '#ffffff'
     });
-    var versionLabel = game.add.text(390,90, '0.19.4.0', 
+    var versionLabel = game.add.text(390,90, '0.20.3.0', 
     {
       font: '10px Arial',
       fill: '#ffffff'
@@ -31,10 +31,73 @@ var menuState = {
       fill: '#ffffff',
       align: 'center'
     });
-    var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    spaceKey.onDown.addOnce(this.start, this);
+    game.add.text(80, game.world.height-60, 'press enter to load',
+    {
+      font: '25px Arial',
+      fill: '#ffffff',
+      align: 'center'
+    });
+  },
+  update: function() {
+    let spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    let enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    if (spaceKey.isDown) {
+      menuState.start()
+    } else if (enterKey.isDown) {
+      menuState.loadGame()
+    }
   },
   start: function() {
     game.state.start('class');
+  },
+  loadGame: function() {
+    game.paused = !game.paused;
+    let load = prompt("Name?")
+    playerStats.name = load;
+    $.ajax({
+      url: `https://battlefantasy.firebaseio.com/${load}.json`,
+      type: "GET",
+    }).done(function(data) {
+      console.log("data", data);
+      if (data === null) {
+        $.ajax({
+          url: `https://battlefantasy.firebaseio.com/Start.json`,
+          type: "GET"
+        }).done(function(data) {
+          $.ajax({
+            url: `https://battlefantasy.firebaseio.com/${load}.json`,
+            type: "PUT",
+            data: JSON.stringify(data)
+          }).done(function(data) {
+            console.log("data", data);
+            playerStats = data.playerStats
+            classTotal = data.classTotal
+            playerHeight = data.playerHeight
+            playerWidth = data.playerWidth
+            statsTotal = data.statsTotal
+            death = data.death
+            beginning = data.beginning
+            gameCameraY = data.gameCameraY
+            gameCameraX = data.gameCameraX
+            lastPage = data.lastPage
+            game.paused = !game.paused;
+            game.state.start(lastPage);            
+          })
+        })
+      } else {
+        playerStats = data.playerStats
+        classTotal = data.classTotal
+        playerHeight = data.playerHeight
+        playerWidth = data.playerWidth
+        statsTotal = data.statsTotal
+        death = data.death
+        beginning = data.beginning
+        gameCameraY = data.gameCameraY
+        gameCameraX = data.gameCameraX
+        lastPage = data.lastPage
+        game.paused = !game.paused;
+        game.state.start(lastPage);
+      }
+    })
   }
 };

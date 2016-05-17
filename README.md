@@ -1,5 +1,5 @@
 # battleFantasy
->> Version: 0.19.4.0
+>> Version: 0.20.3.0
 
 > Personal Project using [Phaser v2.4.6](http://phaser.io/). Updates will be added as they are made.
 
@@ -19,6 +19,7 @@
 
 >> Features
 
+* Saving Added.
 * Boss Added.
 * Dungeon Added.
 * Abilities Added.

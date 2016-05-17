@@ -10,7 +10,7 @@ var useItemState = {
   update: function() {
     var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     if (spaceKey.isDown) {
-      game.state.start(lastPage);
+      game.state.start('pause');
     }
     if (selector.world.y >= 400 || selector.world.y <= 0 || selector.world.y === 100 || selector.world.y === 50 || selector.world.y === 150 || selector.world.y === 200 || selector.world.y === 250 || selector.world.y === 300 || selector.world.y === 350) {
       selector.body.velocity.y = 0;

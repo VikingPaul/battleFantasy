@@ -34,7 +34,7 @@ var pauseState = {
         fill: '#000000'
     });
 
-    var exitLabel = game.add.text(700,280, 'Exit', 
+    var exitLabel = game.add.text(700,280, 'Save', 
       {
         font: '50px Arial',
         fill: '#000000'
@@ -58,9 +58,8 @@ var pauseState = {
     var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     if (enterKey.isDown) {
       if (selector.world.y >= 280) {
-        pauseState.start();
+        pauseState.save();
       } else if (selector.world.y <= 5) {
-        lastPage = "pause";
         game.state.start('useItem');
       } else if (selector.world.y >= 60 && selector.world.y <= 80) {
         pauseState.showStats();
@@ -72,7 +71,7 @@ var pauseState = {
     }
   },
   start: function() {
-    game.state.start('world');
+    game.state.start(lastPage);
   },
   pause: function() {
     game.paused = !game.paused;
@@ -95,5 +94,29 @@ var pauseState = {
       string += playerStats.abilities.name[i] +": " + playerStats.abilities.cost[i] + " MP\n";
     }
     words.setText(string);
+  },
+  save: function() {
+    console.log("name", playerStats.name);
+    if (playerStats.name === undefined) {
+      game.paused = !game.paused;
+      playerStats.name = prompt("Name?")
+      game.paused = !game.paused;
+    }
+    let save = {};
+    save.playerStats = playerStats;
+    save.classTotal = classTotal;
+    save.playerHeight = playerHeight;
+    save.playerWidth = playerWidth;
+    save.statsTotal = statsTotal;
+    save.death = death;
+    save.beginning = beginning;
+    save.gameCameraY = gameCameraY;
+    save.gameCameraX = gameCameraX;
+    save.lastPage = lastPage;
+    $.ajax({
+      url: `https://battlefantasy.firebaseio.com/${playerStats.name}.json`,
+      type: "PUT",
+      data: JSON.stringify(save)
+    }).done()
   }
 };
